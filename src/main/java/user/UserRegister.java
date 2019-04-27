@@ -16,8 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class UserRegister
  */
-//@ManagedBean
-//@SessionScoped
 @WebServlet(name = "UserRegister", urlPatterns = "/register")
 public class UserRegister extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -33,6 +31,9 @@ public class UserRegister extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+	
+	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -43,16 +44,7 @@ public class UserRegister extends HttpServlet {
 
 //		RequestDispatcher view = request.getRequestDispatcher("index.html");
 //		view.forward(request, response);
-
-//		 Set response content type
-		response.setContentType("text/html");
-
-		String message = "Hello World";
 		
-		// Actual logic goes here.
-		PrintWriter out = response.getWriter();
-		out.println("<h1>" + message + "</h1>");
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -61,20 +53,21 @@ public class UserRegister extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-//		doGet(request, response);
-		System.out.println("enter");
+		request.setCharacterEncoding("UTF-8");
+	    response.setCharacterEncoding("UTF-8");
+	    response.setContentType("text/html; charset=UTF-8");	
+		
 		String name = request.getParameter("name");
+		String gender = request.getParameter("gender");
+		String email = request.getParameter("email");
 		
 		User user = new User();
-//		user.setId(1);
 		user.setName(name);
-		user.setGender("a");
-		user.setEmail("a");
+		user.setGender(gender);
+		user.setEmail(email);
 		
 		userService.saveEmployee(user);
 		
-		System.out.println(name);
 	}
 
 }
