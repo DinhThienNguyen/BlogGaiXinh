@@ -1,17 +1,23 @@
 package post;
 
+import user.User;
+
 public class PostComment {
 	private Integer id;
-	private String username;
+	private Integer upvote;
+	private Integer downvote;
 	private String content;
+	private User user;
 	public PostComment() {
 		super();
 	}
-	public PostComment(Integer id, String username, String content) {
+	public PostComment(Integer id, Integer upvote, Integer downvote, String content, User user) {
 		super();
 		this.id = id;
-		this.username = username;
+		this.upvote = upvote;
+		this.downvote = downvote;
 		this.content = content;
+		this.user = user;
 	}
 	public Integer getId() {
 		return id;
@@ -19,11 +25,17 @@ public class PostComment {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getUsername() {
-		return username;
+	public Integer getUpvote() {
+		return upvote;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUpvote(Integer upvote) {
+		this.upvote = upvote;
+	}
+	public Integer getDownvote() {
+		return downvote;
+	}
+	public void setDownvote(Integer downvote) {
+		this.downvote = downvote;
 	}
 	public String getContent() {
 		return content;
@@ -31,4 +43,12 @@ public class PostComment {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	
 }
