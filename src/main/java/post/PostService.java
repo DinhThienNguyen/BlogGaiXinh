@@ -1,5 +1,6 @@
 package post;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.ejb.EJB;
@@ -9,6 +10,8 @@ import technical.GenericService;
 import user.UserService;
 
 @Stateless
+//@ManagedBean(name = "postService")
+//@SessionScoped
 public class PostService extends GenericService<PostEntity, Post>{
 
 	@EJB
@@ -55,6 +58,12 @@ public class PostService extends GenericService<PostEntity, Post>{
 	public Post findById(Integer id) {
 		// TODO Auto-generated method stub
 		return super.findById(id);
+	}
+	
+	@Override
+	public List<Post> findAll() {
+		// TODO Auto-generated method stub
+		return super.findAll();
 	}
 
 }

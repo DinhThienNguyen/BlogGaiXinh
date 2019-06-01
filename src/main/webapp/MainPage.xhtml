@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </link>
+  <title>
+    Example
+  </title>
+</h:head>
+
+<style type="text/css">
+  a:hover {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .ui-widget {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  }
+
+  .ui-datascroller .ui-datascroller-item {
+    border-bottom: 15px solid #fff;
+
+    /* with the exported variables from Nova and Luna Themes*/
+    border-bottom-color: var(--input-border-color, #A8A8A8);
+  }
+</style>
+
+<h:body>
+  <h:outputStylesheet library="css" name="bootstrap.css" />
+  <ui:insert name="header">
+    <ui:include src="header.xhtml" />
+  </ui:insert>
+  <div class="container">
+
+
+    <h:form id="form">
+      <div class="form-group">
+        <p:dataScroller value="#{postView.posts}" var="post" chunkSize="8">
+
+          <h:panelGrid columns="1" style="width:100%">
+
+            <p:outputPanel autoUpdate="true" deferred="true" deferredMode="visible">
+
+              <p:commandLink action="#{postView.move}">
+                <f:param name="postId" value="#{post.id}" />
+                <h:panelGrid columns="1" cellpadding="5">
+
+                  <h:outputLabel value="#{post.title}" style="font-weight: bold" />
+
+                  <div class="d-flex justify-content-center">
+                    <p:graphicImage styleClass="img-fluid" value="#{imageStreamer.image}">
+                      <f:param name="imageId" value="#{post.postImage.id}" />
+                    </p:graphicImage>
+                  </div>
+
+                </h:panelGrid>
+              </p:commandLink>
+
+              <h:panelGrid columns="1" cellpadding="5">
+
+                <p:commandLink action="#{postView.upvotePost(post)}" update="upvote">
+
+                  <h:outputText value="#{post.upvoteAsString}" id="upvote" />
+
+                  <f:param name="postId" value="#{post.id}" />
+                </p:commandLink>
+                <p:commandLink action="#{postView.upvotePost}">
+
+                  <h:outputText value="#{post.downvoteAsString}" />
+
+                  <f:param name="postId" value="#{post.id}" />
+                </p:commandLink>
+              </h:panelGrid>
+
+            </p:outputPanel>
+
+          </h:panelGrid>
+        </p:dataScroller>
+      </div>
+    </h:form>
+  </div>
+
+
+</h:body>
+
+</html>

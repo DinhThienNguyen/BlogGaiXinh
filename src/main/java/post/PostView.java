@@ -1,58 +1,67 @@
 package post;
 
-import java.io.File;
-import java.io.FileInputStream;
+import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.bean.RequestScoped;
-
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 @javax.faces.bean.ManagedBean
-@RequestScoped
-public class PostView {
+@SessionScoped
+//@ApplicationScoped
+public class PostView implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@EJB
 	PostService postService;
-	
-	private Post post;
-	
-	private StreamedContent chart;
-	private List<PostComment> comments;
+
+	private List<Post> posts;
 
 	@PostConstruct
 	public void init() {
-		try {
-			post = postService.findById(1);
-			
-			File chartFile = new File(post.getPostImage().getPath());
-			chart = new DefaultStreamedContent(new FileInputStream(chartFile), "image/jpg");
-			
-//			comments = new ArrayList<PostComment>();
-//			PostComment postComment = new PostComment(1, "thien", "my dudes");
-//			PostComment postComment2 = new PostComment(2, "thien2", "my dudes2");
-//			PostComment postComment3 = new PostComment(3, "thien3", "my dudes3");
-//			comments.add(postComment);
-//			comments.add(postComment2);
-//			comments.add(postComment3);
+		posts = postService.findAll();
+	}
 
-			
-		} catch (Exception e) {
-			e.printStackTrace();
+	public String move() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		Integer postId = Integer.valueOf(context.getExternalContext().getRequestParameterMap().get("postId"));
+//		System.out.println(postId);
+		return "PostDetail?faces-redirect=true&postId=" + postId;
+	}
+
+	public void upvotePost(Post post) {
+//		FacesContext context = FacesContext.getCurrentInstance();
+//		Integer postId = Integer.valueOf(context.getExternalContext().getRequestParameterMap().get("postId"));
+		Post existingPost = posts.stream().filter(eachPost -> post.getId().equals(eachPost.getId())).findAny()
+				.orElse(null);
+		if (existingPost != null) {
+			existingPost.setUpvote(existingPost.getUpvote() + 1);
+			postService.update(postService.toEntity(existingPost));
+			System.out.println("Upvoted post with id of " + post.getId());
+		} else {
+			System.out.println("Could not upvote post with id of " + post.getId());
 		}
+
 	}
 
-	public List<PostComment> getComments() {
-		return comments;
+	public List<Post> getPosts() {
+		return posts;
 	}
 
-	public void setComments(List<PostComment> comments) {
-		this.comments = comments;
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
 	}
 
-	public StreamedContent getChart() {
-		return chart;
+	public PostService getPostService() {
+		return postService;
+	}
+
+	public void setPostService(PostService postService) {
+		this.postService = postService;
 	}
 }

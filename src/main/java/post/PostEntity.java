@@ -25,7 +25,7 @@ public class PostEntity {
 	private Integer id;
 	
 	@Column(name = "title")
-	private Integer title;
+	private String title;
 	
 	@Column(name = "timestamp")
 	private Integer timestamp;
@@ -40,14 +40,14 @@ public class PostEntity {
 	@JoinColumn(name = "user_id", nullable = true)
 	private UserEntity userEntity;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "image_id", nullable = true)
 	private PostImageEntity imageEntity;
 	
 	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="postEntity")
     private List<PostCommentEntity> comments;
 
-	public PostEntity(Integer id, Integer title, Integer timestamp, Integer upvote, Integer downvote,
+	public PostEntity(Integer id, String title, Integer timestamp, Integer upvote, Integer downvote,
 			UserEntity userEntity, PostImageEntity imageEntity) {
 		super();
 		this.id = id;
@@ -71,11 +71,11 @@ public class PostEntity {
 		this.id = id;
 	}
 
-	public Integer getTitle() {
+	public String getTitle() {
 		return title;
 	}
 
-	public void setTitle(Integer title) {
+	public void setTitle(String title) {
 		this.title = title;
 	}
 

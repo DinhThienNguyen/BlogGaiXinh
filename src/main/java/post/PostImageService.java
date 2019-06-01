@@ -29,5 +29,11 @@ public class PostImageService extends GenericService<PostImageEntity, PostImage>
 		}
 		return new PostImage(entity.getId(), entity.getPath());
 	}
+	
+	@Override
+	public PostImage findById(Integer id) {
+		// TODO Auto-generated method stub
+		return super.findById(id);
+	}
 
 }
