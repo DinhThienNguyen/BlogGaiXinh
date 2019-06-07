@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -23,40 +24,37 @@ public class PostEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
-	
+
 	@Column(name = "title")
 	private String title;
-	
+
 	@Column(name = "timestamp")
-	private Integer timestamp;
-	
-	@Column(name = "upvote")
-	private Integer upvote;
-	
-	@Column(name = "downvote")
-	private Integer downvote;
-	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Long createTimestamp;
+
+	@Column(name = "vote")
+	private Integer vote;
+
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id", nullable = true)
 	private UserEntity userEntity;
-	
+
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "image_id", nullable = true)
 	private PostImageEntity imageEntity;
-	
-	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="postEntity")
-    private List<PostCommentEntity> comments;
 
-	public PostEntity(Integer id, String title, Integer timestamp, Integer upvote, Integer downvote,
-			UserEntity userEntity, PostImageEntity imageEntity) {
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "postEntity")
+	private List<PostCommentEntity> comments;
+
+	public PostEntity(Integer id, String title, Long createTimestamp, Integer vote, UserEntity userEntity,
+			PostImageEntity imageEntity, List<PostCommentEntity> comments) {
 		super();
 		this.id = id;
 		this.title = title;
-		this.timestamp = timestamp;
-		this.upvote = upvote;
-		this.downvote = downvote;
+		this.createTimestamp = createTimestamp;
+		this.vote = vote;
 		this.userEntity = userEntity;
 		this.imageEntity = imageEntity;
+		this.comments = comments;
 	}
 
 	public PostEntity() {
@@ -79,28 +77,20 @@ public class PostEntity {
 		this.title = title;
 	}
 
-	public Integer getTimestamp() {
-		return timestamp;
+	public Long getCreateTimestamp() {
+		return createTimestamp;
 	}
 
-	public void setTimestamp(Integer timestamp) {
-		this.timestamp = timestamp;
+	public void setTimestamp(Long createTimestamp) {
+		this.createTimestamp = createTimestamp;
 	}
 
-	public Integer getUpvote() {
-		return upvote;
+	public Integer getVote() {
+		return vote;
 	}
 
-	public void setUpvote(Integer upvote) {
-		this.upvote = upvote;
-	}
-
-	public Integer getDownvote() {
-		return downvote;
-	}
-
-	public void setDownvote(Integer downvote) {
-		this.downvote = downvote;
+	public void setVote(Integer vote) {
+		this.vote = vote;
 	}
 
 	public UserEntity getUserEntity() {
@@ -126,6 +116,5 @@ public class PostEntity {
 	public void setComments(List<PostCommentEntity> comments) {
 		this.comments = comments;
 	}
-	
-	
+
 }

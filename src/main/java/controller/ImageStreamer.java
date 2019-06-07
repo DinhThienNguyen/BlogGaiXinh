@@ -1,4 +1,4 @@
-package post;
+package controller;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,6 +12,9 @@ import javax.faces.event.PhaseId;
 
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
+
+import post.PostImage;
+import services.PostImageService;
 
 @ManagedBean
 @ApplicationScoped

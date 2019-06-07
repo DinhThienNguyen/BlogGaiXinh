@@ -66,7 +66,7 @@ public class UserRegister extends HttpServlet {
 		user.setGender(gender);
 		user.setEmail(email);
 		
-		userService.saveEmployee(user);
+		userService.save(userService.toEntity(user));
 		
 	}
 

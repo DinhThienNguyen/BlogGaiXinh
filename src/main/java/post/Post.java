@@ -1,30 +1,33 @@
 package post;
 
+import java.util.List;
+
 import user.User;
 
 public class Post {
 	private Integer id;
 	private String title;
-	private Integer timestamp;
-	private Integer upvote;
-	private Integer downvote;
+	private Long createTimestamp;
+	private Integer vote;
+
 	private User user;
 	private PostImage postImage;
+	private List<PostComment> comments;
 
 	public Post() {
 		super();
 	}
 
-	public Post(Integer id, String title, Integer timestamp, Integer upvote, Integer downvote, User user,
-			PostImage postImage) {
+	public Post(Integer id, String title, Long createTimestamp, Integer vote, User user, PostImage postImage,
+			List<PostComment> comments) {
 		super();
 		this.id = id;
 		this.title = title;
-		this.timestamp = timestamp;
-		this.upvote = upvote;
-		this.downvote = downvote;
+		this.createTimestamp = createTimestamp;
+		this.vote = vote;
 		this.user = user;
 		this.postImage = postImage;
+		this.comments = comments;
 	}
 
 	public Integer getId() {
@@ -43,28 +46,28 @@ public class Post {
 		this.title = title;
 	}
 
-	public Integer getTimestamp() {
-		return timestamp;
+	public Long getCreateTimestamp() {
+		return createTimestamp;
 	}
 
-	public void setTimestamp(Integer timestamp) {
-		this.timestamp = timestamp;
+	public void setCreateTimestamp(Long createTimestamp) {
+		this.createTimestamp = createTimestamp;
 	}
 
-	public Integer getUpvote() {
-		return upvote;
+	public Integer getVote() {
+		return vote;
 	}
 
-	public void setUpvote(Integer upvote) {
-		this.upvote = upvote;
+	public void setVote(Integer vote) {
+		this.vote = vote;
 	}
 
-	public Integer getDownvote() {
-		return downvote;
+	public String getVoteAsString() {
+		return String.valueOf(vote);
 	}
 
-	public void setDownvote(Integer downvote) {
-		this.downvote = downvote;
+	public void setVoteAsString(String voteAsString) {
+		this.vote = Integer.valueOf(voteAsString);
 	}
 
 	public User getUser() {
@@ -82,21 +85,13 @@ public class Post {
 	public void setPostImage(PostImage postImage) {
 		this.postImage = postImage;
 	}
-	
-	public String getUpvoteAsString() {
-		return String.valueOf(upvote);
+
+	public List<PostComment> getComments() {
+		return comments;
 	}
-	
-	public void setUpvoteAsString(String upvoteAsString) {
-		this.upvote = Integer.valueOf(upvoteAsString);
-	}
-	
-	public String getDownvoteAsString() {
-		return String.valueOf(downvote);
-	}
-	
-	public void setDownvoteAsString(String downvoteAsString) {
-		this.downvote = Integer.valueOf(downvoteAsString);
+
+	public void setComments(List<PostComment> comments) {
+		this.comments = comments;
 	}
 
 }

@@ -43,6 +43,7 @@
 
     <h:form id="form">
       <div class="form-group">
+
         <p:dataScroller value="#{postView.posts}" var="post" chunkSize="8">
 
           <h:panelGrid columns="1" style="width:100%">
@@ -55,6 +56,7 @@
 
                   <h:outputLabel value="#{post.title}" style="font-weight: bold" />
 
+
                   <div class="d-flex justify-content-center">
                     <p:graphicImage styleClass="img-fluid" value="#{imageStreamer.image}">
                       <f:param name="imageId" value="#{post.postImage.id}" />
@@ -66,15 +68,18 @@
 
               <h:panelGrid columns="1" cellpadding="5">
 
-                <p:commandLink action="#{postView.upvotePost(post)}" update="upvote">
+                <p:commandLink action="#{postView.upvotePost(post)}" update="vote">
 
-                  <h:outputText value="#{post.upvoteAsString}" id="upvote" />
+                  <h:outputText value="Upvote" />
 
                   <f:param name="postId" value="#{post.id}" />
                 </p:commandLink>
-                <p:commandLink action="#{postView.upvotePost}">
 
-                  <h:outputText value="#{post.downvoteAsString}" />
+                <h:outputText value="#{post.voteAsString}" id="vote" />
+
+                <p:commandLink action="#{postView.downvotePost(post)}" update="vote">
+
+                  <h:outputText value="Downvote" />
 
                   <f:param name="postId" value="#{post.id}" />
                 </p:commandLink>

@@ -1,13 +1,16 @@
-package post;
+package services;
 
+import java.io.IOException;
 import java.util.Objects;
 
 import javax.ejb.Stateless;
 
-import technical.GenericService;
+import post.PostImage;
+import post.PostImageEntity;
+import ultilities.GenericService;
 
 @Stateless
-public class PostImageService extends GenericService<PostImageEntity, PostImage>{
+public class PostImageService extends GenericService<PostImageEntity, PostImage> {
 
 	public PostImageService() {
 		super(PostImageEntity.class);
@@ -29,11 +32,23 @@ public class PostImageService extends GenericService<PostImageEntity, PostImage>
 		}
 		return new PostImage(entity.getId(), entity.getPath());
 	}
-	
+
 	@Override
 	public PostImage findById(Integer id) {
 		// TODO Auto-generated method stub
 		return super.findById(id);
+	}
+
+	@Override
+	public PostImageEntity save(PostImageEntity entity) {
+		// TODO Auto-generated method stub
+		return super.save(entity);
+	}
+	
+	@Override
+	public PostImage getLatestEntityId() {
+		// TODO Auto-generated method stub
+		return super.getLatestEntityId();
 	}
 
 }

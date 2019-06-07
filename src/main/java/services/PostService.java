@@ -1,4 +1,4 @@
-package post;
+package services;
 
 import java.util.List;
 import java.util.Objects;
@@ -6,7 +6,9 @@ import java.util.Objects;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
-import technical.GenericService;
+import post.Post;
+import post.PostEntity;
+import ultilities.GenericService;
 import user.UserService;
 
 @Stateless
@@ -20,6 +22,9 @@ public class PostService extends GenericService<PostEntity, Post>{
 	@EJB
 	private PostImageService postImageService;
 	
+	@EJB
+	private PostCommentService postCommentService;
+	
 	public PostService() {
 		super(PostEntity.class);
 	}
@@ -31,11 +36,11 @@ public class PostService extends GenericService<PostEntity, Post>{
 		}
 		return new PostEntity(bom.getId(), 
 				bom.getTitle(), 
-				bom.getTimestamp(), 
-				bom.getUpvote(), 
-				bom.getDownvote(), 
+				bom.getCreateTimestamp(), 
+				bom.getVote(),
 				userService.toEntity(bom.getUser()),
-				postImageService.toEntity(bom.getPostImage())
+				postImageService.toEntity(bom.getPostImage()),
+				postCommentService.toEntities(bom.getComments())
 				);
 	}
 
@@ -46,11 +51,11 @@ public class PostService extends GenericService<PostEntity, Post>{
 		}
 		return new Post(entity.getId(), 
 				entity.getTitle(), 
-				entity.getTimestamp(), 
-				entity.getUpvote(), 
-				entity.getDownvote(), 
+				entity.getCreateTimestamp(), 
+				entity.getVote(), 
 				userService.toBom(entity.getUserEntity()),
-				postImageService.toBom(entity.getImageEntity())
+				postImageService.toBom(entity.getImageEntity()),
+				postCommentService.toBoms(entity.getComments())
 				);
 	}
 	

@@ -1,11 +1,14 @@
-package post;
+package services;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
-import technical.GenericService;
+import post.PostComment;
+import post.PostCommentEntity;
+import ultilities.GenericService;
 import user.UserService;
 
 @Stateless
@@ -34,5 +37,15 @@ public class PostCommentService extends GenericService<PostCommentEntity, PostCo
 		return new PostComment(entity.getId(), entity.getUpvote(), entity.getDownvote(), entity.getContent(), userService.toBom(entity.getUserEntity()));
 	}
 	
+	@Override
+	public List<PostComment> toBoms(List<PostCommentEntity> entities) {
+		// TODO Auto-generated method stub
+		return super.toBoms(entities);
+	}
 	
+	@Override
+	public List<PostCommentEntity> toEntities(List<PostComment> boms) {
+		// TODO Auto-generated method stub
+		return super.toEntities(boms);
+	}
 }

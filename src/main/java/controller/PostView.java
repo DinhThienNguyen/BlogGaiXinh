@@ -1,4 +1,4 @@
-package post;
+package controller;
 
 import java.io.Serializable;
 import java.util.List;
@@ -7,6 +7,9 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+
+import post.Post;
+import services.PostService;
 
 @javax.faces.bean.ManagedBean
 @SessionScoped
@@ -40,13 +43,32 @@ public class PostView implements Serializable {
 		Post existingPost = posts.stream().filter(eachPost -> post.getId().equals(eachPost.getId())).findAny()
 				.orElse(null);
 		if (existingPost != null) {
-			existingPost.setUpvote(existingPost.getUpvote() + 1);
+			existingPost.setVote(existingPost.getVote() + 1);
 			postService.update(postService.toEntity(existingPost));
 			System.out.println("Upvoted post with id of " + post.getId());
 		} else {
 			System.out.println("Could not upvote post with id of " + post.getId());
 		}
 
+	}
+	
+	public void downvotePost(Post post) {
+//		FacesContext context = FacesContext.getCurrentInstance();
+//		Integer postId = Integer.valueOf(context.getExternalContext().getRequestParameterMap().get("postId"));
+		Post existingPost = posts.stream().filter(eachPost -> post.getId().equals(eachPost.getId())).findAny()
+				.orElse(null);
+		if (existingPost != null) {
+			existingPost.setVote(existingPost.getVote() - 1);
+			postService.update(postService.toEntity(existingPost));
+			System.out.println("Upvoted post with id of " + post.getId());
+		} else {
+			System.out.println("Could not upvote post with id of " + post.getId());
+		}
+
+	}
+	
+	public void refresh() {
+		
 	}
 
 	public List<Post> getPosts() {

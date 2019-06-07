@@ -1,11 +1,24 @@
 package user;
 
+import java.util.List;
+
+import post.Post;
+
 public class User {
 	private Integer id;
 	private String name;
 	private String gender;
 	private String email;
-	
+	private List<Post> posts;
+
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -42,12 +55,13 @@ public class User {
 		super();
 	}
 
-	public User(Integer id, String name, String gender, String email) {
+	public User(Integer id, String name, String gender, String email, List<Post> posts) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.gender = gender;
 		this.email = email;
+		this.posts = posts;
 	}
-	
+
 }

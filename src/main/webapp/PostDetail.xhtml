@@ -60,15 +60,16 @@
 			<div class="form-group">
 				<div>
 
-					<p:commandLink update="upvote" action="#{postDetailView.upvotePost}">
-						<h:outputText value="#{postDetailView.post.upvoteAsString}" id="upvote" />
+					<p:commandLink update="vote" action="#{postDetailView.upvotePost}">
+						<h:outputText value="Upvote" />
 					</p:commandLink>
-					<p:commandLink update="downvote" action="#{postDetailView.downvotePost}">
-						<h:outputText value="#{postDetailView.post.downvoteAsString}" id="downvote" />
+					<h:outputText value="#{postDetailView.post.voteAsString}" id="vote" />
+					<p:commandLink update="vote" action="#{postDetailView.downvotePost}">
+						<h:outputText value="Downvote" />
 					</p:commandLink>
 				</div>
 
-				<p:dataView var="comment" value="#{postDetailView.comments}" rows="12" paginator="true"
+				<p:dataView var="comment" value="#{postDetailView.post.comments}" rows="12" paginator="true"
 					rowsPerPageTemplate="6,12,16">
 
 					<p:dataViewListItem>
@@ -76,7 +77,7 @@
 
 							<p:outputPanel>
 								<h:panelGrid columns="1" cellpadding="1">
-									<h:outputText value="#{comment.username}" style="font-weight: bold" />
+									<h:outputText value="#{comment.user.name}" style="font-weight: bold" />
 
 
 								</h:panelGrid>
@@ -86,6 +87,18 @@
 
 
 									<h:outputText value="#{comment.content}" />
+								</h:panelGrid>
+							</p:outputPanel>
+							<p:outputPanel>
+								<h:panelGrid columns="1" cellpadding="1">
+
+									<p:commandLink update="upvote" action="#{postDetailView.upvotePost}">
+										<h:outputText value="#{comment.upvoteAsString}" id="upvote" />
+									</p:commandLink>
+									<p:commandLink update="downvote" action="#{postDetailView.downvotePost}">
+										<h:outputText value="#{comment.downvoteAsString}" id="downvote" />
+									</p:commandLink>
+
 								</h:panelGrid>
 							</p:outputPanel>
 
@@ -99,7 +112,7 @@
 
 
 
-	
+
 </h:body>
 
 </html>

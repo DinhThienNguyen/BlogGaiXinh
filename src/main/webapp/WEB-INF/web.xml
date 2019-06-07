@@ -19,7 +19,7 @@
 	</servlet-mapping>
 	<welcome-file-list>
 		
-		<welcome-file>MainPage.xhtml</welcome-file>
-		<welcome-file>PostDetail.xhtml</welcome-file>
+		<welcome-file>CreatePost.xhtml</welcome-file>
+		
 	</welcome-file-list>
 </web-app>

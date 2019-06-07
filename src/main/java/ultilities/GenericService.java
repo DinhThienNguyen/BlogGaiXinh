@@ -1,4 +1,4 @@
-package technical;
+package ultilities;
 
 import java.util.Collections;
 import java.util.List;
@@ -59,6 +59,11 @@ public abstract class GenericService<E , B> {
 		Query query = em.createQuery("SELECT e from " + this.entityClass.getSimpleName()  + " e WHERE e.externalCode = :externalCode", entityClass);
 		query.setParameter("externalCode", externalCode);
 		E entity = (E) query.getSingleResult();
+		return toBom(entity);
+	}
+	
+	public B getLatestEntityId() {
+		E entity = (E)em.createQuery("SELECT e from "+this.entityClass.getSimpleName() + " e ORDER BY e.id desc").setMaxResults(1).getSingleResult();
 		return toBom(entity);
 	}
 
