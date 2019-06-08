@@ -2,7 +2,7 @@ package user;
 
 import java.util.List;
 
-import post.Post;
+import dto.Post;
 
 public class User {
 	private Integer id;

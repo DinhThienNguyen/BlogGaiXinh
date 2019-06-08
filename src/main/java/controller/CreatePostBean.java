@@ -16,11 +16,11 @@ import javax.imageio.ImageIO;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
-import post.Post;
-import post.PostComment;
-import post.PostEntity;
-import post.PostImage;
-import post.PostImageEntity;
+import dto.Post;
+import dto.PostComment;
+import dto.PostImage;
+import entities.PostEntity;
+import entities.PostImageEntity;
 import services.PostImageService;
 import services.PostService;
 import services.UserService;
@@ -52,14 +52,19 @@ public class CreatePostBean {
 
 		PostImage latestImage = postImageService.getLatestEntityId();
 
+		PostImage postImage = new PostImage();		
+		String test = getClass().getClassLoader().getResource("").getPath();
+		postImage.setName(latestImage.getId() + file.getContentType().replaceAll("image/", "."));		
 		try (FileOutputStream fos = new FileOutputStream(
-				System.getProperty("jboss.server.data.dir") + "\\images\\" + (latestImage.getId() + 1) + ".png")) {
+				System.getProperty("jboss.server.data.dir") + "\\images\\" + postImage.getName())) {
 			fos.write(imageContents);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return;
 		}
+		PostImageEntity postImageEntity = postImageService.save(postImageService.toEntity(postImage));
+		postImage.setId(postImageEntity.getId());
 
 		Post post = new Post();
 		post.setTitle(title);
@@ -68,11 +73,6 @@ public class CreatePostBean {
 
 		User user = userService.findById(1);
 		post.setUser(user);
-
-		PostImage postImage = new PostImage();
-		postImage.setPath("");
-		PostImageEntity postImageEntity = postImageService.save(postImageService.toEntity(postImage));
-		postImage.setId(postImageEntity.getId());
 
 		post.setPostImage(postImage);
 		postService.save(postService.toEntity(post));

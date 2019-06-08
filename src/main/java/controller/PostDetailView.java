@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.picketbox.util.StringUtil;
 
-import post.Post;
-import post.PostComment;
+import dto.Post;
+import dto.PostComment;
 import services.PostCommentService;
 import services.PostService;
 

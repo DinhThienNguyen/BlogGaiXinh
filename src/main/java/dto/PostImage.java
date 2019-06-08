@@ -1,17 +1,17 @@
-package post;
+package dto;
 
 public class PostImage {
 	private Integer id;
-	private String path;
+	private String name;
 
 	public PostImage() {
 		super();
 	}
 
-	public PostImage(Integer id, String path) {
+	public PostImage(Integer id, String name) {
 		super();
 		this.id = id;
-		this.path = path;
+		this.name = name;
 	}
 
 	public Integer getId() {
@@ -22,12 +22,12 @@ public class PostImage {
 		this.id = id;
 	}
 
-	public String getPath() {
-		return path;
+	public String getName() {
+		return name;
 	}
 
-	public void setPath(String path) {
-		this.path = path;
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 }

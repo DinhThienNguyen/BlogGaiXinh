@@ -1,4 +1,4 @@
-package post;
+package dto;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

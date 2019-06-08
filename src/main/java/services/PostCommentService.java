@@ -6,8 +6,8 @@ import java.util.Objects;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
-import post.PostComment;
-import post.PostCommentEntity;
+import dto.PostComment;
+import entities.PostCommentEntity;
 import ultilities.GenericService;
 
 @Stateless

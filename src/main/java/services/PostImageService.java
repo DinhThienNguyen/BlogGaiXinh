@@ -5,8 +5,8 @@ import java.util.Objects;
 
 import javax.ejb.Stateless;
 
-import post.PostImage;
-import post.PostImageEntity;
+import dto.PostImage;
+import entities.PostImageEntity;
 import ultilities.GenericService;
 
 @Stateless
@@ -22,7 +22,7 @@ public class PostImageService extends GenericService<PostImageEntity, PostImage>
 		if (Objects.isNull(bom)) {
 			return null;
 		}
-		return new PostImageEntity(bom.getId(), bom.getPath());
+		return new PostImageEntity(bom.getId(), bom.getName());
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class PostImageService extends GenericService<PostImageEntity, PostImage>
 		if (Objects.isNull(entity)) {
 			return null;
 		}
-		return new PostImage(entity.getId(), entity.getPath());
+		return new PostImage(entity.getId(), entity.getName());
 	}
 
 	@Override

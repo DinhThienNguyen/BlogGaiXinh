@@ -18,7 +18,7 @@
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
-		
+		<welcome-file>MainPage.xhtml</welcome-file>
 		<welcome-file>CreatePost.xhtml</welcome-file>
 		
 	</welcome-file-list>

@@ -1,4 +1,4 @@
-package post;
+package dto;
 
 import user.User;
 

@@ -2,16 +2,16 @@ alter SEQUENCE images_id_seq RESTART with 1;
 alter SEQUENCE users_id_seq RESTART with 1;
 alter SEQUENCE posts_id_seq RESTART with 1;
 alter SEQUENCE comments_id_seq RESTART with 1;
-insert into images(path) values('C:/Users/pupper/Pictures/1.jpg');
-insert into images(path) values('C:/Users/pupper/Pictures/2.jpg');
-insert into images(path) values('C:/Users/pupper/Pictures/3.jpg');
-insert into images(path) values('C:/Users/pupper/Pictures/4.jpg');
-insert into images(path) values('C:/Users/pupper/Pictures/5.jpg');
-insert into images(path) values('C:/Users/pupper/Pictures/6.jpg');
-insert into images(path) values('C:/Users/pupper/Pictures/7.jpg');
-insert into images(path) values('C:/Users/pupper/Pictures/8.jpg');
-insert into images(path) values('C:/Users/pupper/Pictures/9.jpg');
-insert into images(path) values('C:/Users/pupper/Pictures/10.jpg');
+insert into images(name) values('1.jpg');
+insert into images(name) values('2.jpg');
+insert into images(name) values('3.jpg');
+insert into images(name) values('4.jpg');
+insert into images(name) values('5.jpg');
+insert into images(name) values('6.jpg');
+insert into images(name) values('7.jpg');
+insert into images(name) values('8.jpg');
+insert into images(name) values('9.jpg');
+insert into images(name) values('10.jpg');
 
 
 insert into users(email, gender, name) values('thien1@gmail.com', 'Male', 'Thien1');

@@ -1,4 +1,4 @@
-package post;
+package entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,8 +15,8 @@ public class PostImageEntity {
 	@Column(name = "id")
 	private Integer id;
 	
-	@Column(name = "path")
-	private String path;
+	@Column(name = "name")
+	private String name;
 
 	public Integer getId() {
 		return id;
@@ -26,18 +26,18 @@ public class PostImageEntity {
 		this.id = id;
 	}
 
-	public String getPath() {
-		return path;
+	public String getName() {
+		return name;
 	}
 
-	public void setPath(String path) {
-		this.path = path;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public PostImageEntity(Integer id, String path) {
+	public PostImageEntity(Integer id, String name) {
 		super();
 		this.id = id;
-		this.path = path;
+		this.name = name;
 	}
 
 	public PostImageEntity() {

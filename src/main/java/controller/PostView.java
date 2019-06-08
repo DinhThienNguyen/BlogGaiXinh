@@ -8,7 +8,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
-import post.Post;
+import dto.Post;
 import services.PostService;
 
 @javax.faces.bean.ManagedBean

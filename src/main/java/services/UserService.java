@@ -6,10 +6,10 @@ import java.util.Objects;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
-import post.Post;
+import dto.Post;
+import entities.UserEntity;
 import ultilities.GenericService;
 import user.User;
-import user.UserEntity;
 
 @Stateless
 public class UserService extends GenericService<UserEntity, User> {
