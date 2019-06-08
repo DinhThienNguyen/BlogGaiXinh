@@ -73,13 +73,12 @@ public class UserEntity {
 		this.email = email;
 	}
 
-	public UserEntity(Integer id, String name, String gender, String email, List<PostEntity> postEntities) {
+	public UserEntity(Integer id, String name, String gender, String email) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.gender = gender;
 		this.email = email;
-		this.postEntities = postEntities;
 	}
 
 	public UserEntity() {

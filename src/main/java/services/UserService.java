@@ -1,12 +1,15 @@
-package user;
+package services;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
-import services.PostService;
+import post.Post;
 import ultilities.GenericService;
+import user.User;
+import user.UserEntity;
 
 @Stateless
 public class UserService extends GenericService<UserEntity, User> {
@@ -18,6 +21,7 @@ public class UserService extends GenericService<UserEntity, User> {
 		super(UserEntity.class);
 	}
 	
+	@Override
 	public UserEntity toEntity(User bom) {
 		if (Objects.isNull(bom)) {
 			return null;
@@ -26,10 +30,11 @@ public class UserService extends GenericService<UserEntity, User> {
 				bom.getId(),
 				bom.getName(),
 				bom.getGender(),
-				bom.getEmail(),
-				postService.toEntities(bom.getPosts()));
+				bom.getEmail()
+			);
 	}
-
+	
+	@Override
 	public User toBom(UserEntity entity) {
 		if (Objects.isNull(entity)) {
 			return null;
@@ -38,9 +43,14 @@ public class UserService extends GenericService<UserEntity, User> {
 				entity.getId(),
 				entity.getName(),
 				entity.getGender(),
-				entity.getEmail(),
-				postService.toBoms(entity.getPostEntities())
+				entity.getEmail()
 				);
+	}
+	
+	@Override
+	public User findById(Integer id) {
+		// TODO Auto-generated method stub
+		return super.findById(id);
 	}
 	
 	@Override

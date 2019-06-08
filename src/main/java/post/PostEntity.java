@@ -34,11 +34,11 @@ public class PostEntity {
 	@Column(name = "vote")
 	private Integer vote;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id", nullable = true)
 	private UserEntity userEntity;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "image_id", nullable = true)
 	private PostImageEntity imageEntity;
 

@@ -9,7 +9,6 @@ import javax.ejb.Stateless;
 import post.Post;
 import post.PostEntity;
 import ultilities.GenericService;
-import user.UserService;
 
 @Stateless
 //@ManagedBean(name = "postService")
@@ -57,6 +56,18 @@ public class PostService extends GenericService<PostEntity, Post>{
 				postImageService.toBom(entity.getImageEntity()),
 				postCommentService.toBoms(entity.getComments())
 				);
+	}
+	
+	@Override
+	public List<Post> toBoms(List<PostEntity> entities) {
+		// TODO Auto-generated method stub
+		return super.toBoms(entities);
+	}
+	
+	@Override
+	public List<PostEntity> toEntities(List<Post> boms) {
+		// TODO Auto-generated method stub
+		return super.toEntities(boms);
 	}
 	
 	@Override

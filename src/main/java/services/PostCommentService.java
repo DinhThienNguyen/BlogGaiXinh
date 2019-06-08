@@ -9,7 +9,6 @@ import javax.ejb.Stateless;
 import post.PostComment;
 import post.PostCommentEntity;
 import ultilities.GenericService;
-import user.UserService;
 
 @Stateless
 public class PostCommentService extends GenericService<PostCommentEntity, PostComment>{

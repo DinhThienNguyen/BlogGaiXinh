@@ -18,11 +18,13 @@ import org.primefaces.model.UploadedFile;
 
 import post.Post;
 import post.PostComment;
+import post.PostEntity;
 import post.PostImage;
+import post.PostImageEntity;
 import services.PostImageService;
 import services.PostService;
+import services.UserService;
 import user.User;
-import user.UserService;
 
 @ManagedBean
 @SessionScoped
@@ -53,7 +55,6 @@ public class CreatePostBean {
 		try (FileOutputStream fos = new FileOutputStream(
 				System.getProperty("jboss.server.data.dir") + "\\images\\" + (latestImage.getId() + 1) + ".png")) {
 			fos.write(imageContents);
-			fos.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -70,7 +71,8 @@ public class CreatePostBean {
 
 		PostImage postImage = new PostImage();
 		postImage.setPath("");
-		postImageService.save(postImageService.toEntity(postImage));
+		PostImageEntity postImageEntity = postImageService.save(postImageService.toEntity(postImage));
+		postImage.setId(postImageEntity.getId());
 
 		post.setPostImage(postImage);
 		postService.save(postService.toEntity(post));

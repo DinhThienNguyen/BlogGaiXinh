@@ -55,13 +55,12 @@ public class User {
 		super();
 	}
 
-	public User(Integer id, String name, String gender, String email, List<Post> posts) {
+	public User(Integer id, String name, String gender, String email) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.gender = gender;
 		this.email = email;
-		this.posts = posts;
 	}
 
 }
