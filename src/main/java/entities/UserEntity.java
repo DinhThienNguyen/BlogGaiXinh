@@ -19,8 +19,11 @@ public class UserEntity {
 	@Column(name = "id")
 	private Integer id;
 
-	@Column(name = "name")
-	private String name;
+	@Column(name = "username")
+	private String username;
+
+	@Column(name = "password")
+	private String password;
 
 	@Column(name = "gender")
 	private String gender;
@@ -47,12 +50,20 @@ public class UserEntity {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getGender() {
@@ -71,10 +82,11 @@ public class UserEntity {
 		this.email = email;
 	}
 
-	public UserEntity(Integer id, String name, String gender, String email) {
+	public UserEntity(Integer id, String username, String password, String gender, String email) {
 		super();
 		this.id = id;
-		this.name = name;
+		this.password = password;
+		this.username = username;
 		this.gender = gender;
 		this.email = email;
 	}

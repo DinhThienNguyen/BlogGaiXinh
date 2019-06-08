@@ -17,6 +17,15 @@
 </h:head>
 
 <style type="text/css">
+	body {
+		background-color: #dbdbdb;
+	}
+
+	.container {
+		background-color: white;
+		margin-top: .5rem;
+	}
+
 	.ui-dataview-header {
 		display: none;
 	}
@@ -39,6 +48,7 @@
 	.title {
 		font-size: 20px;
 		font-weight: 500;
+		margin-top: .5rem;
 	}
 </style>
 
@@ -69,17 +79,21 @@
 					</p:commandLink>
 				</div>
 
-				<p:dataView var="comment" value="#{postDetailView.post.comments}" rows="12" paginator="true"
+				<div class="form-group">
+					<h:outputLabel style="margin-top:10px;" value="Bình luận" />
+					<p:inputTextarea autoResize="false" styleClass="form-control" value="" />
+					<p:commandButton value="Đăng" action="#{postDetailView.saveComment}" style="margin-right:20px;"  />
+				</div>
+
+				<p:dataView style="margin-top: 3rem;" var="comment" value="#{postDetailView.post.comments}" rows="12" paginator="true"
 					rowsPerPageTemplate="6,12,16">
 
 					<p:dataViewListItem>
-						<h:panelGrid columns="1" style="width:100%" columnClasses="logo,detail">
+						<h:panelGrid columns="1" style="width:100%">
 
 							<p:outputPanel>
 								<h:panelGrid columns="1" cellpadding="1">
 									<h:outputText value="#{comment.user.name}" style="font-weight: bold" />
-
-
 								</h:panelGrid>
 							</p:outputPanel>
 							<p:outputPanel>

@@ -42,12 +42,12 @@
 
 
     <h:form id="form">
-      <div class="form-group">
 
-        <p:dataScroller value="#{postView.posts}" var="post" chunkSize="8">
 
-          <h:panelGrid columns="1" style="width:100%">
+      <p:dataScroller value="#{postView.posts}" var="post" chunkSize="8">
 
+        <h:panelGrid columns="1" style="width:100%">
+          <div class="form-group">
             <p:outputPanel autoUpdate="true" deferred="true" deferredMode="visible">
 
               <p:commandLink action="#{postView.move}">
@@ -86,10 +86,10 @@
               </h:panelGrid>
 
             </p:outputPanel>
+          </div>
+        </h:panelGrid>
+      </p:dataScroller>
 
-          </h:panelGrid>
-        </p:dataScroller>
-      </div>
     </h:form>
   </div>
 

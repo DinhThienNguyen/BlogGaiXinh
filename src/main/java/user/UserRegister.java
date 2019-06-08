@@ -64,7 +64,7 @@ public class UserRegister extends HttpServlet {
 		String email = request.getParameter("email");
 		
 		User user = new User();
-		user.setName(name);
+		user.setUsername(name);
 		user.setGender(gender);
 		user.setEmail(email);
 		

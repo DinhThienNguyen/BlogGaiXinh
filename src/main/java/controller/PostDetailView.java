@@ -85,6 +85,10 @@ public class PostDetailView {
 		postService.update(postService.toEntity(post));
 		System.out.println("Downvoted post with id of " + post.getId());
 	}
+	
+	public void saveComment() {
+		
+	}
 
 	public Post getPost() {
 		return post;
