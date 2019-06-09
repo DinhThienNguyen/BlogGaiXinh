@@ -1,7 +1,9 @@
 package controller;
 
+import java.io.IOException;
 import java.io.Serializable;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -21,6 +23,12 @@ public class LoginBean implements Serializable {
 	private String password;
 	private String msg;
 	private String username;
+
+	@PostConstruct
+	public void init() {
+		username = "";
+		password = "";
+	}
 
 	public String getMsg() {
 		return msg;
@@ -50,25 +58,70 @@ public class LoginBean implements Serializable {
 	UserService userService;
 
 	// validate login
-	public String validateUsernamePassword() {
+	public void validateUsernamePassword() {
 		UserEntity userEntity = userService.find(username, password);
 		if (!userEntity.equals(null)) {
 			HttpSession session = SessionUtils.getSession();
 			session.setAttribute("username", username);
-			session.setAttribute("id", userEntity.getId());
-			return "admin";
+			session.setAttribute("userid", userEntity.getId());
+			System.out.println("Set username and password on SessionUtil");
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("MainPage.xhtml");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
 //			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
 //					"Incorrect Username and Passowrd", "Please enter correct username and Password"));
 			System.out.println("incorrect username");
-			return "login";
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("MainPage.xhtml");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
 	// logout event, invalidate session
-	public String logout() {
+	public void logout() {
+		username = "";
+		password = "";
 		HttpSession session = SessionUtils.getSession();
-		session.invalidate();
-		return "login";
+		session.invalidate();		
+		System.out.println(SessionUtils.getUserId());
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("MainPage.xhtml");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void showInfo() {
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("MainPage.xhtml");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public String test() {
+		System.out.println("test");
+		return "MainPage?faces-redirect=true";
+	}
+
+	public boolean isUserLoggedOut() {
+		if (username.equals("") || password.equals(""))
+			return true;
+		return false;
+	}
+
+	public boolean isUserLoggedIn() {
+		if (!username.equals("") || !password.equals(""))
+			return true;
+		return false;
 	}
 }

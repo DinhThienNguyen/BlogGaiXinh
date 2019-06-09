@@ -10,10 +10,10 @@ import javax.faces.context.FacesContext;
 
 import dto.Post;
 import services.PostService;
+import ultilities.SessionUtils;
 
 @javax.faces.bean.ManagedBean
 @SessionScoped
-//@ApplicationScoped
 public class PostView implements Serializable {
 	/**
 	 * 
@@ -33,42 +33,45 @@ public class PostView implements Serializable {
 	public String move() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		Integer postId = Integer.valueOf(context.getExternalContext().getRequestParameterMap().get("postId"));
-//		System.out.println(postId);
 		return "PostDetail?faces-redirect=true&postId=" + postId;
 	}
 
 	public void upvotePost(Post post) {
-//		FacesContext context = FacesContext.getCurrentInstance();
-//		Integer postId = Integer.valueOf(context.getExternalContext().getRequestParameterMap().get("postId"));
-		Post existingPost = posts.stream().filter(eachPost -> post.getId().equals(eachPost.getId())).findAny()
-				.orElse(null);
-		if (existingPost != null) {
-			existingPost.setVote(existingPost.getVote() + 1);
-			postService.update(postService.toEntity(existingPost));
-			System.out.println("Upvoted post with id of " + post.getId());
+		Integer userid = SessionUtils.getUserId();
+		if (userid != null) {
+			Post existingPost = posts.stream().filter(eachPost -> post.getId().equals(eachPost.getId())).findAny()
+					.orElse(null);
+			if (existingPost != null) {
+				existingPost.setVote(existingPost.getVote() + 1);
+				postService.update(postService.toEntity(existingPost));
+				System.out.println("Upvoted post with id of " + post.getId());
+			} else {
+				System.out.println("Could not upvote post with id of " + post.getId());
+			}
 		} else {
-			System.out.println("Could not upvote post with id of " + post.getId());
+			System.out.println("User not logged in");
 		}
-
 	}
-	
+
 	public void downvotePost(Post post) {
-//		FacesContext context = FacesContext.getCurrentInstance();
-//		Integer postId = Integer.valueOf(context.getExternalContext().getRequestParameterMap().get("postId"));
-		Post existingPost = posts.stream().filter(eachPost -> post.getId().equals(eachPost.getId())).findAny()
-				.orElse(null);
-		if (existingPost != null) {
-			existingPost.setVote(existingPost.getVote() - 1);
-			postService.update(postService.toEntity(existingPost));
-			System.out.println("Upvoted post with id of " + post.getId());
+		Integer userid = SessionUtils.getUserId();
+		if (userid != null) {
+			Post existingPost = posts.stream().filter(eachPost -> post.getId().equals(eachPost.getId())).findAny()
+					.orElse(null);
+			if (existingPost != null) {
+				existingPost.setVote(existingPost.getVote() - 1);
+				postService.update(postService.toEntity(existingPost));
+				System.out.println("Upvoted post with id of " + post.getId());
+			} else {
+				System.out.println("Could not upvote post with id of " + post.getId());
+			}
 		} else {
-			System.out.println("Could not upvote post with id of " + post.getId());
+			System.out.println("User not logged in");
 		}
-
 	}
-	
+
 	public void refresh() {
-		
+
 	}
 
 	public List<Post> getPosts() {

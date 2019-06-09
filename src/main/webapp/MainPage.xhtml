@@ -11,11 +11,23 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </link>
   <title>
-    Example
+    BlogGaiXinh: Trang chủ
   </title>
 </h:head>
 
 <style type="text/css">
+  body {
+    background-color: #dae0e6;
+    margin-top: 5rem;
+  }
+
+  .container {
+    background-color: white;
+    margin-top: .5rem;
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+
   a:hover {
     color: #fff;
     text-decoration: none;
@@ -25,11 +37,23 @@
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   }
 
-  .ui-datascroller .ui-datascroller-item {
-    border-bottom: 15px solid #fff;
+  .ui-widget-content {    
+  }
 
-    /* with the exported variables from Nova and Luna Themes*/
-    border-bottom-color: var(--input-border-color, #A8A8A8);
+  .ui-datascroller .ui-datascroller-item {
+    border-bottom: 20px solid;
+    border-bottom-color: #dae0e6;
+  }
+
+  .ui-widget-content {
+    border: none;
+  }
+
+  .ui-datascroller .ui-datascroller-content {
+    padding: 4px 0px;
+  }
+
+  .ui-widget-content a {    
   }
 </style>
 
@@ -44,7 +68,7 @@
     <h:form id="form">
 
 
-      <p:dataScroller value="#{postView.posts}" var="post" chunkSize="8">
+      <p:dataScroller style="background-color: white;" value="#{postView.posts}" var="post" chunkSize="8">
 
         <h:panelGrid columns="1" style="width:100%">
           <div class="form-group">
@@ -54,7 +78,7 @@
                 <f:param name="postId" value="#{post.id}" />
                 <h:panelGrid columns="1" cellpadding="5">
 
-                  <h:outputLabel value="#{post.title}" style="font-weight: bold" />
+                  <h:outputLabel value="#{post.title}" style="font-weight: bold; cursor: pointer;" />
 
 
                   <div class="d-flex justify-content-center">
@@ -66,11 +90,11 @@
                 </h:panelGrid>
               </p:commandLink>
 
-              <h:panelGrid columns="1" cellpadding="5">
+              
 
                 <p:commandLink action="#{postView.upvotePost(post)}" update="vote">
 
-                  <h:outputText value="Upvote" />
+                  <h:outputText value="" class="ui-icon ui-icon-thumb-up" />
 
                   <f:param name="postId" value="#{post.id}" />
                 </p:commandLink>
@@ -83,7 +107,7 @@
 
                   <f:param name="postId" value="#{post.id}" />
                 </p:commandLink>
-              </h:panelGrid>
+              
 
             </p:outputPanel>
           </div>

@@ -28,7 +28,8 @@ public class UserService extends GenericService<UserEntity, User> {
 		if (Objects.isNull(bom)) {
 			return null;
 		}
-		return new UserEntity(bom.getId(), bom.getUsername(), bom.getPassword(), bom.getGender(), bom.getEmail());
+		return new UserEntity(bom.getId(), bom.getUsername(), bom.getPassword(), bom.getFullname(), bom.getGender(),
+				bom.getEmail());
 	}
 
 	@Override
@@ -36,8 +37,8 @@ public class UserService extends GenericService<UserEntity, User> {
 		if (Objects.isNull(entity)) {
 			return null;
 		}
-		return new User(entity.getId(), entity.getUsername(), entity.getPassword(), entity.getGender(),
-				entity.getEmail());
+		return new User(entity.getId(), entity.getUsername(), entity.getPassword(), entity.getFullname(),
+				entity.getGender(), entity.getEmail());
 	}
 
 	@Override
@@ -53,11 +54,26 @@ public class UserService extends GenericService<UserEntity, User> {
 	}
 
 	public UserEntity find(String username, String password) {
-		return this.getEm().createQuery("SELECT e from " + UserEntity.class.getSimpleName()
-				+ " e WHERE e.username = :username and e.password = :password", UserEntity.class)
-				.setParameter("username", username)
-				.setParameter("password", password)
-				.setMaxResults(1)
-				.getSingleResult();				
+		Query query = this.getEm()
+				.createQuery("SELECT e from " + UserEntity.class.getSimpleName()
+						+ " e WHERE e.username = :username and e.password = :password", UserEntity.class)
+				.setParameter("username", username).setParameter("password", password);
+
+		List<UserEntity> entities = query.getResultList();
+		if (entities.isEmpty())
+			return null;
+		return entities.get(0);
+	}
+
+	public UserEntity find(String username) {
+		Query query = this.getEm()
+				.createQuery("SELECT e from " + UserEntity.class.getSimpleName() + " e WHERE e.username = :username",
+						UserEntity.class)
+				.setParameter("username", username);
+
+		List<UserEntity> entities = query.getResultList();
+		if (entities.isEmpty())
+			return null;
+		return entities.get(0);
 	}
 }

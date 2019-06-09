@@ -25,6 +25,9 @@ public class UserEntity {
 	@Column(name = "password")
 	private String password;
 
+	@Column(name = "fullname")
+	private String fullname;
+
 	@Column(name = "gender")
 	private String gender;
 
@@ -82,11 +85,20 @@ public class UserEntity {
 		this.email = email;
 	}
 
-	public UserEntity(Integer id, String username, String password, String gender, String email) {
+	public String getFullname() {
+		return fullname;
+	}
+
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
+	}
+
+	public UserEntity(Integer id, String username, String password, String fullname, String gender, String email) {
 		super();
 		this.id = id;
-		this.password = password;
 		this.username = username;
+		this.password = password;
+		this.fullname = fullname;
 		this.gender = gender;
 		this.email = email;
 	}

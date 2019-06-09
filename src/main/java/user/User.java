@@ -8,6 +8,7 @@ public class User {
 	private Integer id;
 	private String username;
 	private String password;
+	private String fullname;
 	private String gender;
 	private String email;
 	private List<Post> posts;
@@ -44,6 +45,14 @@ public class User {
 		this.password = password;
 	}
 
+	public String getFullname() {
+		return fullname;
+	}
+
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
+	}
+
 	public String getGender() {
 		return gender;
 	}
@@ -64,11 +73,12 @@ public class User {
 		super();
 	}
 
-	public User(Integer id, String username, String password, String gender, String email) {
+	public User(Integer id, String username, String password, String fullname, String gender, String email) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
+		this.fullname = fullname;
 		this.gender = gender;
 		this.email = email;
 	}

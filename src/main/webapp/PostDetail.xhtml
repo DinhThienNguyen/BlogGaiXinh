@@ -18,7 +18,8 @@
 
 <style type="text/css">
 	body {
-		background-color: #dbdbdb;
+		background-color: #dae0e6;
+		margin-top: 5rem;
 	}
 
 	.container {
@@ -60,11 +61,11 @@
 	<div class="container">
 
 		<h:outputLabel styleClass="title" value="#{postDetailView.post.title}" />
-		<div class="d-flex justify-content-center mt-3 mb-3">
+		
 			<p:graphicImage styleClass="img-fluid" value="#{imageStreamer.image}">
 				<f:param name="imageId" value="#{postDetailView.post.postImage.id}" />
 			</p:graphicImage>
-		</div>
+		
 
 		<h:form id="form">
 			<div class="form-group">
@@ -93,7 +94,7 @@
 
 							<p:outputPanel>
 								<h:panelGrid columns="1" cellpadding="1">
-									<h:outputText value="#{comment.user.name}" style="font-weight: bold" />
+									<h:outputText value="#{comment.user.fullname}" style="font-weight: bold" />
 								</h:panelGrid>
 							</p:outputPanel>
 							<p:outputPanel>
