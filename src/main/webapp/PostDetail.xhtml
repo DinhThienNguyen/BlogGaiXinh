@@ -82,7 +82,7 @@
 
 				<div class="form-group">
 					<h:outputLabel style="margin-top:10px;" value="Bình luận" />
-					<p:inputTextarea autoResize="false" styleClass="form-control" value="" />
+					<p:inputTextarea autoResize="false" styleClass="form-control" value="#{postDetailView.comment}" />
 					<p:commandButton value="Đăng" action="#{postDetailView.saveComment}" style="margin-right:20px;"  />
 				</div>
 

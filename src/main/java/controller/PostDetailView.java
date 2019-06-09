@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +19,7 @@ import dto.Post;
 import dto.PostComment;
 import services.PostCommentService;
 import services.PostService;
+import ultilities.SessionUtils;
 
 @ManagedBean
 @ViewScoped
@@ -30,6 +32,8 @@ public class PostDetailView {
 	PostCommentService postCommentService;
 
 	private Post post;
+
+	private String comment;
 
 	@PostConstruct
 	public void init() {
@@ -57,7 +61,7 @@ public class PostDetailView {
 			System.out.println("Could not upvote comment with id of " + comment.getId());
 		}
 	}
-	
+
 	public void downvotevoteComment(PostComment comment) {
 		PostComment existingComment = post.getComments().stream()
 				.filter(eachComment -> comment.getId().equals(eachComment.getId())).findAny().orElse(null);
@@ -71,9 +75,18 @@ public class PostDetailView {
 	}
 
 	public void upvotePost() {
-		post.setVote(post.getVote() + 1);
-		postService.update(postService.toEntity(post));
-		System.out.println("Upvoted post with id of " + post.getId());
+		Integer userid = SessionUtils.getUserId();
+		if (userid != null) {
+			post.setVote(post.getVote() + 1);
+			postService.update(postService.toEntity(post));
+			System.out.println("Upvoted post with id of " + post.getId());
+		} else {
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("SignUp.xhtml");
+			} catch (IOException e) {
+
+			}
+		}
 	}
 
 	public void testMethod() {
@@ -81,13 +94,33 @@ public class PostDetailView {
 	}
 
 	public void downvotePost() {
-		post.setVote(post.getVote() - 1);
-		postService.update(postService.toEntity(post));
-		System.out.println("Downvoted post with id of " + post.getId());
+		Integer userid = SessionUtils.getUserId();
+		if (userid != null) {
+			post.setVote(post.getVote() - 1);
+			postService.update(postService.toEntity(post));
+			System.out.println("Downvoted post with id of " + post.getId());
+		} else {
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("SignUp.xhtml");
+			} catch (IOException e) {
+
+			}
+		}
 	}
-	
+
 	public void saveComment() {
-		
+		Integer userid = SessionUtils.getUserId();
+		if (userid != null) {
+			PostComment postComment = new PostComment();
+			postComment.setContent(comment);
+//			postComment.setUser(user);
+		} else {
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("SignUp.xhtml");
+			} catch (IOException e) {
+
+			}
+		}
 	}
 
 	public Post getPost() {
@@ -96,6 +129,14 @@ public class PostDetailView {
 
 	public void setPost(Post post) {
 		this.post = post;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
 }
