@@ -11,6 +11,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.imageio.ImageIO;
 
 import org.primefaces.event.FileUploadEvent;
@@ -24,6 +25,7 @@ import entities.PostImageEntity;
 import services.PostImageService;
 import services.PostService;
 import services.UserService;
+import ultilities.SessionUtils;
 import user.User;
 
 @ManagedBean
@@ -44,6 +46,15 @@ public class CreatePostBean {
 	@PostConstruct
 	public void init() {
 		imageContents = "Any String you want".getBytes();
+		Integer userid = SessionUtils.getUserId();
+		if (userid.equals(null)) {
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("SignUp.xhtml");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public void handleFileUpload(FileUploadEvent event) {
