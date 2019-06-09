@@ -1,1 +1,5 @@
 /target/
+target/
+.classpath
+.settings/
+src/main/java/controller/ImageStreamer.java
