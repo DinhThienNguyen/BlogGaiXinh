@@ -1,86 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html
 	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
 	<!-- Required meta tags -->
 	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	</link>
-	<title>
-		Example
-	</title>
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<link rel="stylesheet"
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+		crossorigin="anonymous"></link>
+	<title>Example</title>
 </h:head>
 
 <style type="text/css">
-
+.nav-top {
+	border-bottom: 1px solid #e2e2e2d1;
+}
 </style>
 
 <h:body>
 	<ui:composition>
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-			<a class="navbar-brand" href="MainPage.xhtml">BlogGaiXinh</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top nav-top" style="border-bottom: 1px solid #e2e2e2d1;">
+		<a class="navbar-brand" href="MainPage.xhtml">BlogGaiXinh</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
 
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav mr-auto">
-					
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item"><a class="nav-link" href="#">HOT</a></li>
+			</ul>
 
-				</ul>
+			<form class="form-inline my-2 my-lg-0">
 
-				<ul class="navbar-nav justify-content-end">
-					<li class="nav-item">
-						<p:link rendered="#{loginBean.isUserLoggedOut()}" styleClass="btn btn-success mr-2"
-							outcome="SignUp" value="Đăng ký">
-						</p:link>
-					</li>
-					<li class="nav-item active">
-						<p:commandButton style="padding: .2rem 0 .2rem 0;" rendered="#{loginBean.isUserLoggedOut()}"
-							styleClass="btn btn-success mr-2" value="Đăng nhập" onclick="PF('loginDialog').show()" />
-					</li>
-					<li class="nav-item">
-						<h:form>
-							<p:menuButton value="#{loginBean.username}" rendered="#{loginBean.isUserLoggedIn()}">
-								<p:menuitem value="Thông tin" action="#{loginBean.showInfo}" />
-								<p:menuitem value="Đăng xuất" action="#{loginBean.logout}"/>
-							</p:menuButton>
-						</h:form>
-					</li>
+				<p:inputText styleClass="form-control mr-sm-2"
+					placeholder="Tìm kiếm" value="#{loginBean.password}">
+				</p:inputText>
+			</form>
+    
+			<ul class="navbar-nav justify-content-end">
+				<li class="nav-item"><p:link
+						rendered="#{loginBean.isUserLoggedOut()}"
+						styleClass="btn btn-success mr-2" outcome="SignUp" value="Đăng ký">
+					</p:link></li>
+				<li class="nav-item active"><p:commandButton
+						style="padding: .2rem 0 .2rem 0;"
+						rendered="#{loginBean.isUserLoggedOut()}"
+						styleClass="btn btn-success mr-2" value="Đăng nhập"
+						onclick="PF('loginDialog').show()" /></li>
+				<li class="nav-item"><h:form>
+						<p:menuButton value="#{loginBean.username}"
+							rendered="#{loginBean.isUserLoggedIn()}">
+							<p:menuitem value="Thông tin" action="#{loginBean.showInfo}" />
+							<p:menuitem value="Đăng xuất" action="#{loginBean.logout}" />
+						</p:menuButton>
+					</h:form></li>
 
 
-				</ul>
+			</ul>
 
-			</div>
+		</div>
 		</nav>
 		<p:dialog widgetVar="loginDialog">
 			<h:form>
 				<div class="form-group">
-					<h:outputLabel value="Vui lòng đăng nhập để sử dụng các tính năng của web" />
+					<h:outputLabel
+						value="Vui lòng đăng nhập để sử dụng các tính năng của web" />
 				</div>
 
 				<div class="form-group">
 					<h:outputLabel value="Tên người dùng" />
-					<p:inputText style="font-family: 'Roboto', 'Tahoma';" styleClass="form-control"
-						value="#{loginBean.username}">
+					<p:inputText style="font-family: 'Roboto', 'Tahoma';"
+						styleClass="form-control" value="#{loginBean.username}">
 						<f:ajax />
 					</p:inputText>
 				</div>
 
 				<div class="form-group">
 					<h:outputLabel value="Mật khẩu" />
-					<p:inputText style="font-family: 'Roboto', 'Tahoma';" styleClass="form-control"
-						value="#{loginBean.password}">
+					<p:inputText style="font-family: 'Roboto', 'Tahoma';"
+						styleClass="form-control" value="#{loginBean.password}">
 						<f:ajax />
 					</p:inputText>
 				</div>
-				<p:commandButton style="font-family: 'Roboto', 'Tahoma';" value="Đăng nhập" actionListener="#{loginBean.validateUsernamePassword}" />
+				<p:commandButton style="font-family: 'Roboto', 'Tahoma';"
+					value="Đăng nhập"
+					actionListener="#{loginBean.validateUsernamePassword}" />
 
 			</h:form>
 		</p:dialog>
