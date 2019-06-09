@@ -45,14 +45,16 @@ public class CreatePostBean {
 
 	@PostConstruct
 	public void init() {
-		imageContents = "Any String you want".getBytes();
+		imageContents = "Any String you want".getBytes();		
+	}
+
+	public void isUserLoggedIn() {
 		Integer userid = SessionUtils.getUserId();
-		if (userid.equals(null)) {
+		if (userid == null) {
 			try {
 				FacesContext.getCurrentInstance().getExternalContext().redirect("SignUp.xhtml");
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+
 			}
 		}
 	}
@@ -63,9 +65,9 @@ public class CreatePostBean {
 
 		PostImage latestImage = postImageService.getLatestEntityId();
 
-		PostImage postImage = new PostImage();		
+		PostImage postImage = new PostImage();
 		String test = getClass().getClassLoader().getResource("").getPath();
-		postImage.setName(latestImage.getId() + file.getContentType().replaceAll("image/", "."));		
+		postImage.setName(latestImage.getId() + file.getContentType().replaceAll("image/", "."));
 		try (FileOutputStream fos = new FileOutputStream(
 				System.getProperty("jboss.server.data.dir") + "\\images\\" + postImage.getName())) {
 			fos.write(imageContents);
