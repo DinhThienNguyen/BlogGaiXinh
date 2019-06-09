@@ -33,6 +33,7 @@
 </style>
 
 <h:body>
+<f:event type="preRenderView" listener="#{createPostBean.isUserLoggedIn}" />
 	<h:outputStylesheet library="css" name="bootstrap.css" />
 	<ui:insert name="header">
 		<ui:include src="header.xhtml" />
