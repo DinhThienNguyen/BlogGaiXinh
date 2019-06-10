@@ -17,7 +17,6 @@
 </head>
 <body>
 
-
 	<div class="container container-user">
 		<div class="row">
 			<div class="panel panel-default">
@@ -34,7 +33,11 @@
 					<div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
 						<div>
 							<h2 class="name-profile">John Doe</h2>
-							<a class="btn btn-default edit-profile" href="#">Edit Profile</a>
+							<c:if test="${(userIDLogin != null) && (userIDLogin == userID)}">
+								<a class="btn btn-default edit-profile" href="#">Edit
+									Profile</a>
+							</c:if>
+
 						</div>
 
 						<hr>
@@ -79,7 +82,6 @@
 						</div>
 					</c:otherwise>
 				</c:choose>
-
 
 			</div>
 		</div>

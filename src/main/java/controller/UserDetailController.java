@@ -2,9 +2,11 @@ package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.faces.bean.SessionScoped;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,9 +21,11 @@ import entities.UserEntity;
 import services.PostImageService;
 import services.PostService;
 import services.UserService;
+import ultilities.SessionUtils;
 import user.User;
 
 @WebServlet("/userDetailController")
+
 public class UserDetailController extends HttpServlet {
 
 	@EJB
@@ -56,20 +60,26 @@ public class UserDetailController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
 		String userID = req.getParameter("userID");
-		
-		if (userID==null) {
+		Integer userIDLogin = (Integer) req.getSession().getAttribute("userid");
+				
+		if (userIDLogin == null && userID ==null ) {
+			// Chuyển qua trang login
 			RequestDispatcher dispatcher = req.getRequestDispatcher("userDetailError.jsp");
 			dispatcher.forward(req, response);
 		}
 		
-		List<String> imagePaths = new ArrayList();
+		if (userIDLogin != null && userID == null ) {
+			userID = userIDLogin.toString();
+		}
+		
+		List<String> imagePaths = new LinkedList<>();
 		UserEntity userEntity = userService.find(Integer.parseInt(userID));
-		
-		if(userEntity==null) {
+
+		if (userEntity == null) {
 			RequestDispatcher dispatcher = req.getRequestDispatcher("userDetailError.jsp");
 			dispatcher.forward(req, response);
 		}
-		
+
 		List<PostEntity> postEntities = userEntity.getPostEntities();
 
 		if (postEntities != null && !postEntities.isEmpty()) {
@@ -83,6 +93,8 @@ public class UserDetailController extends HttpServlet {
 			}
 		}
 
+		req.setAttribute("userIDLogin", userIDLogin);
+		req.setAttribute("userID", userID);
 		req.setAttribute("imagePaths", imagePaths);
 
 		//
