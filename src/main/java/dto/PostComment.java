@@ -1,7 +1,5 @@
 package dto;
 
-import user.User;
-
 public class PostComment {
 	private Integer id;
 	private Integer vote;

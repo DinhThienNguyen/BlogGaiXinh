@@ -1,14 +1,12 @@
 package services;
 
 import java.util.List;
-import java.util.Objects;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import dto.Post;
 import entities.PostEntity;
-import entities.UserEntity;
 import ultilities.GenericService;
 
 @Stateless

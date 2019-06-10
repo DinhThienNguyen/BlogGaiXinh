@@ -5,30 +5,37 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import dto.Post;
 import entities.PostEntity;
 import services.PostService;
 import ultilities.SessionUtils;
 
-@javax.faces.bean.ManagedBean
+@ManagedBean
 @ViewScoped
 public class PostView implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static final String UPVOTED_STYLE = "margin-right:20px; background-color: rgb(255, 69, 0);";
+	private static final String DOWNVOTED_STYLE = "margin-right:20px; background-color: rgb(113, 147, 255);";
+	private static final String DEFAULT_STYLE = "margin-right:20px;";
 
 	@EJB
 	PostService postService;
 
 	private List<PostEntity> posts;
+	private String upvoteButtonStyle;
+	private String downvoteButtonStyle;
 
 	@PostConstruct
 	public void init() {
-		posts = postService.findAll();		
+		posts = postService.findAll();
+		upvoteButtonStyle = DEFAULT_STYLE;
+		downvoteButtonStyle = DEFAULT_STYLE;
 	}
 
 	public String move() {
@@ -90,4 +97,21 @@ public class PostView implements Serializable {
 	public void setPostService(PostService postService) {
 		this.postService = postService;
 	}
+
+	public String getUpvoteButtonStyle() {
+		return upvoteButtonStyle;
+	}
+
+	public void setUpvoteButtonStyle(String upvoteButtonStyle) {
+		this.upvoteButtonStyle = upvoteButtonStyle;
+	}
+
+	public String getDownvoteButtonStyle() {
+		return downvoteButtonStyle;
+	}
+
+	public void setDownvoteButtonStyle(String downvoteButtonStyle) {
+		this.downvoteButtonStyle = downvoteButtonStyle;
+	}
+
 }

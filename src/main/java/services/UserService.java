@@ -1,17 +1,14 @@
 package services;
 
 import java.util.List;
-import java.util.Objects;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.jws.soap.SOAPBinding.Use;
 import javax.persistence.Query;
 
-import dto.Post;
+import dto.User;
 import entities.UserEntity;
 import ultilities.GenericService;
-import user.User;
 
 @Stateless
 public class UserService extends GenericService<UserEntity, User> {

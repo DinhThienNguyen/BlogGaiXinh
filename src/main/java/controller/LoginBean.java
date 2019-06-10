@@ -97,7 +97,6 @@ public class LoginBean implements Serializable {
 		try {
 			FacesContext.getCurrentInstance().getExternalContext().redirect("MainPage.xhtml");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -106,15 +105,9 @@ public class LoginBean implements Serializable {
 		try {
 			FacesContext.getCurrentInstance().getExternalContext().redirect("MainPage.xhtml");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	public String test() {
-		System.out.println("test");
-		return "MainPage?faces-redirect=true";
-	}
+	}	
 
 	public boolean isUserLoggedOut() {
 		if (username.equals("") || password.equals(""))

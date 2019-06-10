@@ -26,7 +26,7 @@ insert into users(fullname, email, gender, username, password) values('Le Van I'
 insert into users(fullname, email, gender, username, password) values('Le Van K', 'thien10@gmail.com', 'female', 'LeVanK', 'levank');
 insert into users(fullname, email, gender, username, password) values('USerTest', 'aaaan10@gmail.com', 'female', 'user', '123456');
 
-insert into posts(vote, createtimestamp, title, image_id, user_id) values(2, 1558866953, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 3, 5);
+insert into posts(vote, createtimestamp, title, image_id, user_id) values(2, 1558866953, 'dudes', 3, 5);
 insert into posts(vote, createtimestamp, title, image_id, user_id) values(7, 1558866953, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 1, 6);
 insert into posts(vote, createtimestamp, title, image_id, user_id) values(5, 1558866953, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 8, 10);
 insert into posts(vote, createtimestamp, title, image_id, user_id) values(1, 1558866953, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 6, 7);
@@ -55,3 +55,13 @@ insert into comments(content, vote, createtimestamp, post_id, user_id) values('L
 insert into comments(content, vote, createtimestamp, post_id, user_id) values('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.', 34, 1558866953, 6, 2);
 insert into comments(content, vote, createtimestamp, post_id, user_id) values('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.', 34, 1558866953, 7, 3);
 insert into comments(content, vote, createtimestamp, post_id, user_id) values('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.', 34, 1558866953, 7, 8);
+
+insert into user_upvotedpost(user_id, post_id) values(1, 4);
+insert into user_upvotedpost(user_id, post_id) values(1, 6);
+insert into user_upvotedpost(user_id, post_id) values(1, 7);
+insert into user_upvotedpost(user_id, post_id) values(1, 8);
+
+insert into user_downvotedpost(user_id, post_id) values(1, 1);
+insert into user_downvotedpost(user_id, post_id) values(1, 2);
+insert into user_downvotedpost(user_id, post_id) values(1, 3);
+insert into user_downvotedpost(user_id, post_id) values(1, 5);
