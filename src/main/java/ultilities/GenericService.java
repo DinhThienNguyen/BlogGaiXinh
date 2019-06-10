@@ -62,6 +62,13 @@ public abstract class GenericService<E , B> {
 		return toBom(entity);
 	}
 	
+	public B findByExternalCode(String externalCode, int val) {
+		Query query = em.createQuery("SELECT e from " + this.entityClass.getSimpleName()  + " e WHERE e.externalCode = :externalCode", entityClass);
+		query.setParameter("externalCode", val);
+		E entity = (E) query.getSingleResult();
+		return toBom(entity);
+	}
+	
 	public B getLatestEntityId() {
 		E entity = (E)em.createQuery("SELECT e from "+this.entityClass.getSimpleName() + " e ORDER BY e.id desc").setMaxResults(1).getSingleResult();
 		return toBom(entity);
