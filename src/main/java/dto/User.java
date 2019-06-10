@@ -1,8 +1,6 @@
-package user;
+package dto;
 
 import java.util.List;
-
-import dto.Post;
 
 public class User {
 	private Integer id;

@@ -1,7 +1,7 @@
 package controller;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.picketbox.util.StringUtil;
 
-import dto.Post;
 import dto.PostComment;
 import entities.PostCommentEntity;
 import entities.PostEntity;
@@ -25,6 +24,10 @@ import ultilities.SessionUtils;
 @ManagedBean
 @ViewScoped
 public class PostDetailView {
+
+	private static final String UPVOTED_STYLE = "margin-right:20px; background-color: rgb(255, 69, 0);";
+	private static final String DOWNVOTED_STYLE = "margin-right:20px; background-color: rgb(113, 147, 255);";
+	private static final String DEFAULT_STYLE = "margin-right:20px;";
 
 	@EJB
 	PostService postService;
@@ -39,6 +42,9 @@ public class PostDetailView {
 
 	private String comment;
 
+	private String upvoteButtonStyle;
+	private String downvoteButtonStyle;
+
 	@PostConstruct
 	public void init() {
 
@@ -48,9 +54,24 @@ public class PostDetailView {
 		String test = request.getParameter("postId");
 		System.out.println("Navigating to post with id of " + test);
 
+		upvoteButtonStyle = DEFAULT_STYLE;
+		downvoteButtonStyle = DEFAULT_STYLE;
+
 		if (!StringUtil.isNullOrEmpty(test)) {
 			post = postService.findById(Integer.valueOf(test));
-
+			Integer userid = SessionUtils.getUserId();
+			if (userid != null) {
+				UserEntity userEntity = post.getUpvotedUser().stream().filter(user -> userid.equals(user.getId()))
+						.findAny().orElse(null);
+				if (userEntity != null) {
+					upvoteButtonStyle = UPVOTED_STYLE;
+				}
+				userEntity = post.getDownvotedUser().stream().filter(user -> userid.equals(user.getId())).findAny()
+						.orElse(null);
+				if (userEntity != null) {
+					downvoteButtonStyle = DOWNVOTED_STYLE;
+				}
+			}
 		}
 	}
 
@@ -81,7 +102,25 @@ public class PostDetailView {
 	public void upvotePost() {
 		Integer userid = SessionUtils.getUserId();
 		if (userid != null) {
-			post.setVote(post.getVote() + 1);
+			UserEntity userEntity = post.getUpvotedUser().stream().filter(user -> userid.equals(user.getId())).findAny()
+					.orElse(null);
+			if (userEntity != null) {
+				upvoteButtonStyle = DEFAULT_STYLE;
+				post.setVote(post.getVote() - 1);
+				post.getUpvotedUser().remove(userEntity);
+			} else {
+				userEntity = post.getDownvotedUser().stream().filter(user -> userid.equals(user.getId())).findAny()
+						.orElse(null);
+				if (userEntity != null) {
+					post.getDownvotedUser().remove(userEntity);
+					post.setVote(post.getVote() + 1);
+					downvoteButtonStyle = DEFAULT_STYLE;
+				}
+				userEntity = userService.find(userid);
+				post.getUpvotedUser().add(userEntity);
+				post.setVote(post.getVote() + 1);
+				upvoteButtonStyle = UPVOTED_STYLE;
+			}
 			postService.update(post);
 			System.out.println("Upvoted post with id of " + post.getId());
 		} else {
@@ -93,14 +132,28 @@ public class PostDetailView {
 		}
 	}
 
-	public void testMethod() {
-		System.out.println("hello");
-	}
-
 	public void downvotePost() {
 		Integer userid = SessionUtils.getUserId();
 		if (userid != null) {
-			post.setVote(post.getVote() - 1);
+			UserEntity userEntity = post.getDownvotedUser().stream().filter(user -> userid.equals(user.getId()))
+					.findAny().orElse(null);
+			if (userEntity != null) {
+				downvoteButtonStyle = DEFAULT_STYLE;
+				post.setVote(post.getVote() + 1);
+				post.getDownvotedUser().remove(userEntity);
+			} else {
+				userEntity = post.getUpvotedUser().stream().filter(user -> userid.equals(user.getId())).findAny()
+						.orElse(null);
+				if (userEntity != null) {
+					post.getUpvotedUser().remove(userEntity);
+					post.setVote(post.getVote() - 1);
+					upvoteButtonStyle = DEFAULT_STYLE;
+				}
+				userEntity = userService.find(userid);
+				post.getDownvotedUser().add(userEntity);
+				post.setVote(post.getVote() - 1);
+				downvoteButtonStyle = DOWNVOTED_STYLE;
+			}
 			postService.update(post);
 			System.out.println("Downvoted post with id of " + post.getId());
 		} else {
@@ -152,6 +205,22 @@ public class PostDetailView {
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+	public String getUpvoteButtonStyle() {
+		return upvoteButtonStyle;
+	}
+
+	public void setUpvoteButtonStyle(String upvoteButtonStyle) {
+		this.upvoteButtonStyle = upvoteButtonStyle;
+	}
+
+	public String getDownvoteButtonStyle() {
+		return downvoteButtonStyle;
+	}
+
+	public void setDownvoteButtonStyle(String downvoteButtonStyle) {
+		this.downvoteButtonStyle = downvoteButtonStyle;
 	}
 
 }

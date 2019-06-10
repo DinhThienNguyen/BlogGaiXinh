@@ -70,15 +70,12 @@
 
 		<h:form id="form">
 			<div class="form-group">
-				<div>
-
-					<p:commandLink update="vote" action="#{postDetailView.upvotePost}">
-						<h:outputText value="Upvote" />
-					</p:commandLink>
-					<h:outputText value="#{postDetailView.post.voteAsString}" id="vote" />
-					<p:commandLink update="vote" action="#{postDetailView.downvotePost}">
-						<h:outputText value="Downvote" />
-					</p:commandLink>
+				<div>					
+					<p:commandButton update="form" value="Thích" action="#{postDetailView.upvotePost}"
+						style="#{postDetailView.upvoteButtonStyle}" />
+					<h:outputText style="margin-right:20px;" value="#{postDetailView.post.voteAsString}" id="vote" />					
+					<p:commandButton update="form" value="Không thích" action="#{postDetailView.downvotePost}"
+						style="#{postDetailView.downvoteButtonStyle}" />
 				</div>
 
 				<div class="form-group">

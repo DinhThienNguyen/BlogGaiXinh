@@ -1,13 +1,19 @@
 package entities;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.JoinColumn;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -37,6 +43,12 @@ public class UserEntity {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userEntity")
 	private List<PostEntity> postEntities;
 
+	@ManyToMany(mappedBy = "upvotedUser")
+	private Set<PostEntity> upvotedPost = new HashSet<>();
+
+	@ManyToMany(mappedBy = "downvotedUser")
+	private Set<PostEntity> downvotedPost = new HashSet<>();
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userEntity")
 	private List<PostCommentEntity> postCommentEntities;
 
@@ -54,6 +66,22 @@ public class UserEntity {
 
 	public void setPostEntities(List<PostEntity> postEntities) {
 		this.postEntities = postEntities;
+	}
+
+	public Set<PostEntity> getUpvotedPost() {
+		return upvotedPost;
+	}
+
+	public void setUpvotedPost(Set<PostEntity> upvotedPost) {
+		this.upvotedPost = upvotedPost;
+	}
+
+	public Set<PostEntity> getDownvotedPost() {
+		return downvotedPost;
+	}
+
+	public void setDownvotedPost(Set<PostEntity> downvotedPost) {
+		this.downvotedPost = downvotedPost;
 	}
 
 	public Integer getId() {

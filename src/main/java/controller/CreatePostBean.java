@@ -12,8 +12,6 @@ import javax.faces.context.FacesContext;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
-import dto.Post;
-import dto.PostImage;
 import entities.PostEntity;
 import entities.PostImageEntity;
 import entities.UserEntity;
@@ -21,7 +19,6 @@ import services.PostImageService;
 import services.PostService;
 import services.UserService;
 import ultilities.SessionUtils;
-import user.User;
 
 @ManagedBean
 @SessionScoped

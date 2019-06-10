@@ -87,13 +87,15 @@
 
 						<h:panelGrid columns="1" style="width:100%">
 
-							<p:outputPanel class="card card-main-page" autoUpdate="true" deferred="true" deferredMode="visible">
+							<p:outputPanel class="card card-main-page" autoUpdate="true" deferred="true"
+								deferredMode="visible">
 
 								<p:commandLink action="#{postView.move}">
 									<f:param name="postId" value="#{post.id}" />
 									<h:panelGrid columns="1" cellpadding="5">
 
-										<h:outputLabel value="#{post.title}" style="font-weight: bold; cursor: pointer;" />
+										<h:outputLabel value="#{post.title}"
+											style="font-weight: bold; cursor: pointer;" />
 
 
 										<div class="d-flex justify-content-center">
@@ -106,23 +108,15 @@
 								</p:commandLink>
 
 
+								<div>
+									<p:commandButton id="upvoteButton" update="upvoteButton vote downvoteButton" value="Thích"
+										action="#{postView.upvotePost(post)}" style="#{postView.upvoteButtonStyle}"/>
+																									
+									<h:outputText style="margin-right:20px;" value="#{post.voteAsString}" id="vote" />
 
-								<p:commandLink action="#{postView.upvotePost(post)}" update="vote">
-
-									<h:outputText value="" class="ui-icon ui-icon-thumb-up" />
-
-									<f:param name="postId" value="#{post.id}" />
-								</p:commandLink>
-
-								<h:outputText value="#{post.voteAsString}" id="vote" />
-
-								<p:commandLink action="#{postView.downvotePost(post)}" update="vote">
-
-									<h:outputText value="Downvote" />
-
-									<f:param name="postId" value="#{post.id}" />
-								</p:commandLink>
-
+									<p:commandButton id="downvoteButton" update="upvoteButton vote downvoteButton" value="Không thích"
+										action="#{postView.downvotePost(post)}" style="#{postView.downvoteButtonStyle}"/>
+								</div>
 
 							</p:outputPanel>
 

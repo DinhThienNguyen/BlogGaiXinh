@@ -2,8 +2,6 @@ package dto;
 
 import java.util.List;
 
-import user.User;
-
 public class Post {
 	private Integer id;
 	private String title;

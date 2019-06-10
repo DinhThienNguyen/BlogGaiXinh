@@ -1,8 +1,5 @@
 package services;
 
-import java.io.IOException;
-import java.util.Objects;
-
 import javax.ejb.Stateless;
 
 import dto.PostImage;
