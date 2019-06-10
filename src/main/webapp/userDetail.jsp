@@ -62,21 +62,24 @@
 
 			<div class="row">
 
-
-
-				<div class="images">
-					<c:forEach items="${imagePaths}" var="path">
-						<div class="image-item">
-							<img
-								alt="Image may contain: sky, ocean, twilight, outdoor, nature and water"
-								class="FFVAD" decoding="auto" sizes="293px"
-								src="<c:out value="${path}"/>"
-								style="object-fit: cover;">
+				<c:choose>
+					<c:when test="${imagePaths.isEmpty()}">
+						<div class="not-image">Don't have image.</div>
+					</c:when>
+					<c:otherwise>
+						<div class="images">
+							<c:forEach items="${imagePaths}" var="path">
+								<div class="image-item">
+									<img
+										alt="Image may contain: sky, ocean, twilight, outdoor, nature and water"
+										class="FFVAD" decoding="auto" sizes="293px"
+										src="<c:out value="${path}"/>" style="object-fit: cover;">
+								</div>
+							</c:forEach>
 						</div>
-					</c:forEach>
+					</c:otherwise>
+				</c:choose>
 
-
-				</div>
 
 			</div>
 		</div>

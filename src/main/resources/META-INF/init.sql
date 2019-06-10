@@ -24,6 +24,7 @@ insert into users(fullname, email, gender, username, password) values('Thiện A
 insert into users(fullname, email, gender, username, password) values('Thiện A', 'thien8@gmail.com', 'Male', 'Thien8', 'thien1');
 insert into users(fullname, email, gender, username, password) values('Thiện A', 'thien9@gmail.com', 'Male', 'Thien9', 'thien1');
 insert into users(fullname, email, gender, username, password) values('Thiện A', 'thien10@gmail.com', 'Male', 'Thien10', 'thien1');
+insert into users(fullname, email, gender, username, password) values('USerTest', 'aaaan10@gmail.com', 'Male', 'user', '123456');
 
 insert into posts(vote, timestamp, title, image_id, user_id) values(2, 1558866953, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 3, 5);
 insert into posts(vote, timestamp, title, image_id, user_id) values(7, 1558866953, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 1, 6);
