@@ -15,6 +15,17 @@
 </h:head>
 
 <style type="text/css">
+	body {
+		background-color: #dae0e6;
+		margin-top: 5rem;
+	}
+
+	.container {
+		background-color: white;
+		margin-top: .5rem;
+	}
+
+
 	.ui-dataview-header {
 		display: none;
 	}
@@ -33,7 +44,7 @@
 </style>
 
 <h:body>
-<f:event type="preRenderView" listener="#{createPostBean.isUserLoggedIn}" />
+	<f:event type="preRenderView" listener="#{createPostBean.isUserLoggedIn}" />
 	<h:outputStylesheet library="css" name="bootstrap.css" />
 	<ui:insert name="header">
 		<ui:include src="header.xhtml" />

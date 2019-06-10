@@ -1,85 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html
-  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 	<!-- Required meta tags -->
 	<meta charset="utf-8" />
-	<meta name="viewport"
-		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-	<link rel="stylesheet"
-		href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-		crossorigin="anonymous"></link>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	</link>
 	<title>BlogGaiXinh: Trang chủ</title>
 </h:head>
 
 <style type="text/css">
-body {
-	/* background-color: #dae0e6; */
-	margin-top: 5rem;
-}
+	body {
+		/* background-color: #dae0e6; */
+		margin-top: 5rem;
+	}
 
-.container-body {
-    max-width: 935px;
-}
+	.container-body {
+		max-width: 935px;
+	}
 
-.container {
-	background-color: white;
-	margin-top: .5rem;
-	padding-right: 0px;
-	padding-left: 0px;
-}
+	.container {
+		background-color: white;
+		margin-top: .5rem;
+		padding-right: 0px;
+		padding-left: 0px;
+	}
 
-li.ui-datascroller-item {
-    padding-bottom: 18px;
-}
+	li.ui-datascroller-item {
+		padding-bottom: 18px;
+	}
 
-.card-header-main {
-	height: 34px;
-	background:
-		url(https://www.redditstatic.com/desktop2x/img/id-cards/home-banner@2x.png)
-		center center/cover no-repeat rgb(0, 121, 211);
-	border-radius: 4px 4px 0px 0px;
-}
+	.card-header-main {
+		height: 34px;
+		background:
+			url(https://www.redditstatic.com/desktop2x/img/id-cards/home-banner@2x.png) center center/cover no-repeat rgb(0, 121, 211);
+		border-radius: 4px 4px 0px 0px;
+	}
 
-.card-main-page {
-	padding: 10px;
-}
+	.card-main-page {
+		padding: 10px;
+	}
 
-.btn-create-post {
-	display: block;
-	margin-top: 12px;
-	text-transform: uppercase;
-}
-
+	.btn-create-post {
+		display: block;
+		margin-top: 12px;
+		text-transform: uppercase;
+	}
 
 
-.ui-widget {
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-		"Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
-		"Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-}
 
-.ui-widget-content {
-	
-}
+	.ui-widget {
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+			"Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+			"Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	}
 
-.ui-widget-content {
-	border: none;
-}
+	.ui-widget-content {}
 
-.ui-datascroller .ui-datascroller-content {
-	padding: 4px 0px;
-}
+	.ui-widget-content {
+		border: none;
+	}
 
-.ui-widget-content a {
-	
-}
+	.ui-datascroller .ui-datascroller-content {
+		padding: 4px 0px;
+	}
+
+	.ui-widget-content a {}
 </style>
 
 <h:body>
@@ -93,55 +83,49 @@ li.ui-datascroller-item {
 			<div class="col-lg-8">
 
 				<h:form id="form">
-					<p:dataScroller style="background-color: white;"
-						value="#{postView.posts}" var="post" chunkSize="8">
+					<p:dataScroller style="background-color: white;" value="#{postView.posts}" var="post" chunkSize="8">
 
 						<h:panelGrid columns="1" style="width:100%">
-						
-								<p:outputPanel class= "card card-main-page" autoUpdate="true" deferred="true"
-									deferredMode="visible">
 
-									<p:commandLink action="#{postView.move}">
-										<f:param name="postId" value="#{post.id}" />
-										<h:panelGrid columns="1" cellpadding="5">
+							<p:outputPanel class="card card-main-page" autoUpdate="true" deferred="true" deferredMode="visible">
 
-											<h:outputLabel value="#{post.title}"
-												style="font-weight: bold; cursor: pointer;" />
+								<p:commandLink action="#{postView.move}">
+									<f:param name="postId" value="#{post.id}" />
+									<h:panelGrid columns="1" cellpadding="5">
+
+										<h:outputLabel value="#{post.title}" style="font-weight: bold; cursor: pointer;" />
 
 
-											<div class="d-flex justify-content-center">
-												<p:graphicImage styleClass="img-fluid"
-													value="#{imageStreamer.image}">
-													<f:param name="imageId" value="#{post.postImage.id}" />
-												</p:graphicImage>
-											</div>
+										<div class="d-flex justify-content-center">
+											<p:graphicImage styleClass="img-fluid" value="#{imageStreamer.image}">
+												<f:param name="imageId" value="#{post.postImage.id}" />
+											</p:graphicImage>
+										</div>
 
-										</h:panelGrid>
-									</p:commandLink>
+									</h:panelGrid>
+								</p:commandLink>
 
 
 
-									<p:commandLink action="#{postView.upvotePost(post)}"
-										update="vote">
+								<p:commandLink action="#{postView.upvotePost(post)}" update="vote">
 
-										<h:outputText value="" class="ui-icon ui-icon-thumb-up" />
+									<h:outputText value="" class="ui-icon ui-icon-thumb-up" />
 
-										<f:param name="postId" value="#{post.id}" />
-									</p:commandLink>
+									<f:param name="postId" value="#{post.id}" />
+								</p:commandLink>
 
-									<h:outputText value="#{post.voteAsString}" id="vote" />
+								<h:outputText value="#{post.voteAsString}" id="vote" />
 
-									<p:commandLink action="#{postView.downvotePost(post)}"
-										update="vote">
+								<p:commandLink action="#{postView.downvotePost(post)}" update="vote">
 
-										<h:outputText value="Downvote" />
+									<h:outputText value="Downvote" />
 
-										<f:param name="postId" value="#{post.id}" />
-									</p:commandLink>
+									<f:param name="postId" value="#{post.id}" />
+								</p:commandLink>
 
 
-								</p:outputPanel>
-					
+							</p:outputPanel>
+
 
 						</h:panelGrid>
 
@@ -160,8 +144,7 @@ li.ui-datascroller-item {
 							here to see the most shared, upvoted, and commented content on
 							the internet.</p>
 
-						<button type="button"
-							class="btn btn btn-info form-control btn-create-post">Create
+						<button type="button" class="btn btn btn-info form-control btn-create-post">Create
 							post</button>
 					</div>
 				</div>

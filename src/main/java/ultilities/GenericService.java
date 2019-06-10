@@ -10,7 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 @SuppressWarnings("unchecked")
-public abstract class GenericService<E , B> {
+public abstract class GenericService<E, B> {
 	private final Class<E> entityClass;
 
 	@PersistenceContext(name = "BlogGaiXinh")
@@ -32,12 +32,12 @@ public abstract class GenericService<E , B> {
 		this.em = em;
 	}
 
-	public E save(E entity) {		
+	public E save(E entity) {
 		this.em.persist(entity);
 		this.em.flush();
 		return entity;
 	}
-	
+
 	public E update(E entity) {
 		this.em.merge(entity);
 		this.em.flush();
@@ -45,7 +45,7 @@ public abstract class GenericService<E , B> {
 	}
 
 	public List<B> findAll() {
-		Query query = em.createQuery("SELECT e from " + this.entityClass.getSimpleName()  + " e", entityClass);
+		Query query = em.createQuery("SELECT e from " + this.entityClass.getSimpleName() + " e", entityClass);
 		List<E> resultList = query.getResultList();
 		return toBoms(resultList);
 	}
@@ -56,14 +56,17 @@ public abstract class GenericService<E , B> {
 	}
 
 	public B findByExternalCode(String externalCode) {
-		Query query = em.createQuery("SELECT e from " + this.entityClass.getSimpleName()  + " e WHERE e.externalCode = :externalCode", entityClass);
+		Query query = em.createQuery(
+				"SELECT e from " + this.entityClass.getSimpleName() + " e WHERE e.externalCode = :externalCode",
+				entityClass);
 		query.setParameter("externalCode", externalCode);
 		E entity = (E) query.getSingleResult();
 		return toBom(entity);
 	}
-	
+
 	public B getLatestEntityId() {
-		E entity = (E)em.createQuery("SELECT e from "+this.entityClass.getSimpleName() + " e ORDER BY e.id desc").setMaxResults(1).getSingleResult();
+		E entity = (E) em.createQuery("SELECT e from " + this.entityClass.getSimpleName() + " e ORDER BY e.id desc")
+				.setMaxResults(1).getSingleResult();
 		return toBom(entity);
 	}
 
@@ -71,7 +74,7 @@ public abstract class GenericService<E , B> {
 		E entity = em.find(entityClass, id);
 		if (Objects.nonNull(entity)) {
 			em.remove(entity);
-		} 
+		}
 	}
 
 	public List<E> toEntities(List<B> boms) {

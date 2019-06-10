@@ -1,14 +1,10 @@
 package controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
@@ -17,8 +13,11 @@ import org.picketbox.util.StringUtil;
 
 import dto.Post;
 import dto.PostComment;
+import entities.PostCommentEntity;
+import entities.UserEntity;
 import services.PostCommentService;
 import services.PostService;
+import services.UserService;
 import ultilities.SessionUtils;
 
 @ManagedBean
@@ -27,6 +26,9 @@ public class PostDetailView {
 
 	@EJB
 	PostService postService;
+
+	@EJB
+	UserService userService;
 
 	@EJB
 	PostCommentService postCommentService;
@@ -54,7 +56,7 @@ public class PostDetailView {
 		PostComment existingComment = post.getComments().stream()
 				.filter(eachComment -> comment.getId().equals(eachComment.getId())).findAny().orElse(null);
 		if (existingComment != null) {
-			existingComment.setUpvote(existingComment.getUpvote() + 1);
+			existingComment.setVote(existingComment.getVote() + 1);
 			postCommentService.update(postCommentService.toEntity(existingComment));
 			System.out.println("Upvoted comment with id of " + comment.getId());
 		} else {
@@ -66,7 +68,7 @@ public class PostDetailView {
 		PostComment existingComment = post.getComments().stream()
 				.filter(eachComment -> comment.getId().equals(eachComment.getId())).findAny().orElse(null);
 		if (existingComment != null) {
-			existingComment.setUpvote(existingComment.getUpvote() + 1);
+			existingComment.setVote(existingComment.getVote() + 1);
 			postCommentService.update(postCommentService.toEntity(existingComment));
 			System.out.println("Upvoted comment with id of " + comment.getId());
 		} else {
@@ -109,11 +111,22 @@ public class PostDetailView {
 	}
 
 	public void saveComment() {
+		if (post != null)
+			System.out.println("post not null");
+		else {
+			System.out.println("post null");
+		}
 		Integer userid = SessionUtils.getUserId();
 		if (userid != null) {
-			PostComment postComment = new PostComment();
-			postComment.setContent(comment);
-//			postComment.setUser(user);
+			PostCommentEntity postCommentEntity = new PostCommentEntity();
+			postCommentEntity.setContent(comment);
+			UserEntity userEntity = userService.find(userid);
+			postCommentEntity.setUserEntity(userEntity);
+//			postCommentEntity.setPostEntity(postEntity);
+
+			postCommentEntity.setVote(0);
+			postCommentEntity = postCommentService.save(postCommentEntity);
+//			post.getComments().add(0, postCommentService.toBom(commentEntity));
 		} else {
 			try {
 				FacesContext.getCurrentInstance().getExternalContext().redirect("SignUp.xhtml");

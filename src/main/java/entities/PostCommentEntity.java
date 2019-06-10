@@ -20,14 +20,11 @@ public class PostCommentEntity {
 	@Column(name = "id")
 	private Integer id;
 
-	@Column(name = "upvote")
-	private Integer upvote;
-
-	@Column(name = "downvote")
-	private Integer downvote;
-
 	@Column(name = "content")
 	private String content;
+
+	@Column(name = "vote")
+	private Integer vote;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id", nullable = true)
@@ -41,11 +38,10 @@ public class PostCommentEntity {
 		super();
 	}
 
-	public PostCommentEntity(Integer id, Integer upvote, Integer downvote, String content, UserEntity userEntity) {
+	public PostCommentEntity(Integer id, Integer vote, String content, UserEntity userEntity) {
 		super();
 		this.id = id;
-		this.upvote = upvote;
-		this.downvote = downvote;
+		this.vote = vote;
 		this.content = content;
 		this.userEntity = userEntity;
 	}
@@ -58,20 +54,12 @@ public class PostCommentEntity {
 		this.id = id;
 	}
 
-	public Integer getUpvote() {
-		return upvote;
+	public Integer getVote() {
+		return vote;
 	}
 
-	public void setUpvote(Integer upvote) {
-		this.upvote = upvote;
-	}
-
-	public Integer getDownvote() {
-		return downvote;
-	}
-
-	public void setDownvote(Integer downvote) {
-		this.downvote = downvote;
+	public void setVote(Integer vote) {
+		this.vote = vote;
 	}
 
 	public String getContent() {
@@ -98,5 +86,4 @@ public class PostCommentEntity {
 		this.postEntity = postEntity;
 	}
 
-	
 }

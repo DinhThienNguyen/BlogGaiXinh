@@ -4,22 +4,19 @@ import user.User;
 
 public class PostComment {
 	private Integer id;
-	private Integer upvote;
-	private String upvoteAsString;
-	private Integer downvote;
-	private String downvoteAsString;
+	private Integer vote;
 	private String content;
 	private User user;
+	private Post post;
 
 	public PostComment() {
 		super();
 	}
 
-	public PostComment(Integer id, Integer upvote, Integer downvote, String content, User user) {
+	public PostComment(Integer id, Integer vote, String content, User user) {
 		super();
 		this.id = id;
-		this.upvote = upvote;
-		this.downvote = downvote;
+		this.vote = vote;
 		this.content = content;
 		this.user = user;
 	}
@@ -30,22 +27,6 @@ public class PostComment {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public Integer getUpvote() {
-		return upvote;
-	}
-
-	public void setUpvote(Integer upvote) {
-		this.upvote = upvote;
-	}
-
-	public Integer getDownvote() {
-		return downvote;
-	}
-
-	public void setDownvote(Integer downvote) {
-		this.downvote = downvote;
 	}
 
 	public String getContent() {
@@ -64,19 +45,24 @@ public class PostComment {
 		this.user = user;
 	}
 
-	public String getUpvoteAsString() {
-		return upvoteAsString;
+	public Integer getVote() {
+		return vote;
 	}
 
-	public void setUpvoteAsString(String upvoteAsString) {
-		this.upvoteAsString = upvoteAsString;
+	public void setVote(Integer vote) {
+		this.vote = vote;
 	}
 
-	public String getDownvoteAsString() {
-		return downvoteAsString;
+	public String getVoteAsString() {
+		return String.valueOf(vote);
 	}
 
-	public void setDownvoteAsString(String downvoteAsString) {
-		this.downvoteAsString = downvoteAsString;
+	public Post getPost() {
+		return post;
 	}
+
+	public void setPost(Post post) {
+		this.post = post;
+	}
+
 }

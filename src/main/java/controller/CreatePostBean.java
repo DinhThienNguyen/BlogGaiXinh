@@ -1,26 +1,19 @@
 package controller;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.imageio.ImageIO;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
 import dto.Post;
-import dto.PostComment;
 import dto.PostImage;
-import entities.PostEntity;
 import entities.PostImageEntity;
 import services.PostImageService;
 import services.PostService;
@@ -45,7 +38,7 @@ public class CreatePostBean {
 
 	@PostConstruct
 	public void init() {
-		imageContents = "Any String you want".getBytes();		
+		imageContents = "Any String you want".getBytes();
 	}
 
 	public void isUserLoggedIn() {
@@ -65,14 +58,12 @@ public class CreatePostBean {
 
 		PostImage latestImage = postImageService.getLatestEntityId();
 
-		PostImage postImage = new PostImage();
-		String test = getClass().getClassLoader().getResource("").getPath();
+		PostImage postImage = new PostImage();		
 		postImage.setName(latestImage.getId() + file.getContentType().replaceAll("image/", "."));
 		try (FileOutputStream fos = new FileOutputStream(
 				System.getProperty("jboss.server.data.dir") + "\\images\\" + postImage.getName())) {
 			fos.write(imageContents);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return;
 		}
@@ -84,13 +75,18 @@ public class CreatePostBean {
 		post.setCreateTimestamp(System.currentTimeMillis() / 1000L);
 		post.setVote(0);
 
-		User user = userService.findById(1);
+		User user = userService.findById(SessionUtils.getUserId());
 		post.setUser(user);
 
 		post.setPostImage(postImage);
 		postService.save(postService.toEntity(post));
 
 		System.out.println("uploaded " + file.getFileName());
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("MainPage.xhtml");
+		} catch (IOException e) {
+
+		}
 	}
 
 	public byte[] getImageContents() {

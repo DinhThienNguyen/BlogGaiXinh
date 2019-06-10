@@ -46,6 +46,10 @@ public class UserService extends GenericService<UserEntity, User> {
 		// TODO Auto-generated method stub
 		return super.findById(id);
 	}
+	
+	public UserEntity find(Integer id) {
+		return this.getEm().find(UserEntity.class, id);
+	}
 
 	@Override
 	public UserEntity save(UserEntity entity) {
