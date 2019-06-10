@@ -13,19 +13,19 @@
 
 <script src="resources/js/jquery-1.11.1.min.js"></script>
 <script src="resources/js/bootstrap.min.js"></script>
-
+<script src="resources/js/script.js"></script>
 </head>
 <body>
 
 	<div class="container container-user">
 
 		<c:if test="${status == 'success'}">
-			<div class="alert alert-success" style="margin-top: 30px"
+			<div id="status-update" class="alert alert-success" style="margin-top: 30px"
 				role="alert">Cập nhật thành công.</div>
 		</c:if>
 		
 		<c:if test="${status == 'failure'}">
-			<div class="alert alert-danger" style="margin-top: 30px"
+			<div id="status-update" class="alert alert-danger" style="margin-top: 30px"
 				role="alert">Không thể cập nhật.</div>
 		</c:if>
 
@@ -49,7 +49,7 @@
 						<!-- Tab panes -->
 						<div class="tab-content">
 							<div class="tab-pane active" id="home-v">
-								<form class="form-horizontal" action="userEditController"
+								<form class="form-horizontal" action="userEditController?userID=${userEntity.getId()}"
 									method="POST">
 									<fieldset>
 
@@ -207,6 +207,10 @@
 			</div>
 		</div>
 	</div>
+
+<script type="text/javascript">
+
+</script>
 
 </body>
 </html>

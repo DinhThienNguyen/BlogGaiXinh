@@ -23,7 +23,6 @@ import services.PostImageService;
 import services.PostService;
 import services.UserService;
 import ultilities.SessionUtils;
-import user.User;
 
 @WebServlet("/userEditController")
 public class UserEditController extends HttpServlet {
@@ -48,9 +47,9 @@ public class UserEditController extends HttpServlet {
 		System.out.println(bio);
 		System.out.println(gender);
 		
-		UserEntity userEntity = new UserEntity();
+//		UserEntity userEntity = new UserEntity();
 		
-//		UserEntity userEntity = userService.findById(1);
+		UserEntity userEntity = userService.find(1);
 		
 		userEntity.setFullname(fullname);
 		userEntity.setEmail(email);
@@ -73,9 +72,29 @@ public class UserEditController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
-	
+		Integer userIDLogin = (Integer) req.getSession().getAttribute("userid");
+		String userID = req.getParameter("userID");
 		
-		UserEntity userEntity = userService.find(1);
+		if (userIDLogin == null) {
+			RequestDispatcher dispatcher = req.getRequestDispatcher("userDetailErr.jsp");
+			dispatcher.forward(req, response);
+			return;
+		}
+		
+		if(userID == null) {
+			userID = userIDLogin.toString();
+		}
+				
+		System.out.println(userID);
+		System.out.println(userIDLogin.toString());
+		
+		if (!userIDLogin.toString().equals(userID)) {
+			RequestDispatcher dispatcher = req.getRequestDispatcher("userDontPermission.jsp");
+			dispatcher.forward(req, response);
+			return;
+		}
+			
+		UserEntity userEntity = userService.find(Integer.parseInt(userID));
 		
 		req.setAttribute("userEntity", userEntity);
 		RequestDispatcher dispatcher = req.getRequestDispatcher("userEdit.jsp");
