@@ -4,3 +4,4 @@ target/
 .settings/
 src/main/java/controller/ImageStreamer.java
 src\main\java\controller\ImageStreamer.java
+/bin/

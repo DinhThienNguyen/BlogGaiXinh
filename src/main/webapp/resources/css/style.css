@@ -1,0 +1,61 @@
+.user-image-profile {
+        max-width: 147px;
+        margin-top: 35px;
+        display: inline-block;
+    }
+
+    .col-image {
+        text-align: center;
+    }
+
+    ul.user-list-tool {
+        display: -webkit-box;
+        list-style: none;
+        margin-left: -40px;
+    }
+
+    li.Y8-fY {
+        margin-left: 0;
+        margin-right: 30px;
+    }
+
+    .container-user {
+        max-width: 935px;
+    }
+
+    .panel-user {
+        padding: 15px 15px 36px 15px;
+    }
+
+    .image-item {
+    width: 31%;
+    display: inline-block;
+    margin-left: 15px;
+    margin-bottom: 20px;
+}
+
+img.FFVAD {
+    width: 100%;
+}
+
+a.-nal3:hover {
+    text-decoration: none;
+}
+
+a.-nal3 {
+    color: #000;
+}
+
+span.g47SY {
+    font-weight: 600;
+}
+
+.edit-profile {
+    padding: 3px 12px;
+    margin-left: 18px;
+    margin-bottom: 10px;
+}
+
+.name-profile {
+    display: inline-block;
+}
