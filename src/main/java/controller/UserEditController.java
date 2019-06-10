@@ -33,13 +33,32 @@ public class UserEditController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
 
+		Integer userIDLogin = (Integer) req.getSession().getAttribute("userid");
+		String userID = req.getParameter("userID");
+		
+		if (userIDLogin == null) {
+			RequestDispatcher dispatcher = req.getRequestDispatcher("userDetailErr.jsp");
+			dispatcher.forward(req, response);
+			return;
+		}
+		
+		if(userID == null) {
+			userID = userIDLogin.toString();
+		}
+		
+		if (!userIDLogin.toString().equals(userID)) {
+			RequestDispatcher dispatcher = req.getRequestDispatcher("userDontPermission.jsp");
+			dispatcher.forward(req, response);
+			return;
+		}
+		
 		String fullname = req.getParameter("fullName");
 		String username = req.getParameter("username");
 		String email = req.getParameter("email");
 		String bio = req.getParameter("bio");
 		String gender = req.getParameter("gender");
 	
-		UserEntity userEntity = userService.find(1);	
+		UserEntity userEntity = userService.find(Integer.parseInt(userID));	
 		userEntity.setFullname(fullname);
 		userEntity.setEmail(email);
 		userEntity.setBio(bio);
@@ -52,7 +71,7 @@ public class UserEditController extends HttpServlet {
 		else
 			req.setAttribute("status", "failure");
 		
-		UserEntity userEntity1 = userService.find(1);
+		UserEntity userEntity1 = userService.find(Integer.parseInt(userID));
 		req.setAttribute("userEntity", userEntity1);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("userEdit.jsp");
@@ -73,9 +92,6 @@ public class UserEditController extends HttpServlet {
 		if(userID == null) {
 			userID = userIDLogin.toString();
 		}
-				
-		System.out.println(userID);
-		System.out.println(userIDLogin.toString());
 		
 		if (!userIDLogin.toString().equals(userID)) {
 			RequestDispatcher dispatcher = req.getRequestDispatcher("userDontPermission.jsp");

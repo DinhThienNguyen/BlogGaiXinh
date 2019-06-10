@@ -32,7 +32,7 @@
 
 					<div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
 						<div>
-							<h2 class="name-profile">John Doe</h2>
+							<h2 class="name-profile">${userEntity.getUsername()}</h2>
 							<c:if test="${(userIDLogin != null) && (userIDLogin == userID)}">
 								<a class="btn btn-default edit-profile" href="userEditController">Edit
 									Profile</a>
@@ -54,11 +54,8 @@
 						</ul>
 
 						<div class="details">
-							<span> Chuyện bắt đầu nẩy nở, đòi hỏi phải có trí lực và
-								sự dẻo dai. Mọi điều khởi nguồn từ cốt cách của tâm hồn, tâm trí
-								tương thông tấm lòng luôn rộng mở. </span>
+							<span>${userEntity.getBio()}</span>
 						</div>
-
 					</div>
 				</div>
 			</div>

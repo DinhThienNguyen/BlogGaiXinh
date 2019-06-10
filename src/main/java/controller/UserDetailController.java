@@ -78,7 +78,9 @@ public class UserDetailController extends HttpServlet {
 		req.setAttribute("userIDLogin", userIDLogin);
 		req.setAttribute("userID", userID);
 		req.setAttribute("imagePaths", imagePaths);
-
+		
+		req.setAttribute("userEntity", userEntity);
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("userDetail.jsp");
 		dispatcher.forward(req, response);
 
