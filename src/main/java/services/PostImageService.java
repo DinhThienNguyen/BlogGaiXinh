@@ -17,24 +17,24 @@ public class PostImageService extends GenericService<PostImageEntity, PostImage>
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public PostImageEntity toEntity(PostImage bom) {
-		if (Objects.isNull(bom)) {
-			return null;
-		}
-		return new PostImageEntity(bom.getId(), bom.getName());
-	}
+//	@Override
+//	public PostImageEntity toEntity(PostImage bom) {
+//		if (Objects.isNull(bom)) {
+//			return null;
+//		}
+//		return new PostImageEntity(bom.getId(), bom.getName());
+//	}
+//
+//	@Override
+//	public PostImage toBom(PostImageEntity entity) {
+//		if (Objects.isNull(entity)) {
+//			return null;
+//		}
+//		return new PostImage(entity.getId(), entity.getName());
+//	}
 
 	@Override
-	public PostImage toBom(PostImageEntity entity) {
-		if (Objects.isNull(entity)) {
-			return null;
-		}
-		return new PostImage(entity.getId(), entity.getName());
-	}
-
-	@Override
-	public PostImage findById(Integer id) {
+	public PostImageEntity findById(Integer id) {
 		// TODO Auto-generated method stub
 		return super.findById(id);
 	}
@@ -44,9 +44,9 @@ public class PostImageService extends GenericService<PostImageEntity, PostImage>
 		// TODO Auto-generated method stub
 		return super.save(entity);
 	}
-	
+
 	@Override
-	public PostImage getLatestEntityId() {
+	public PostImageEntity getLatestEntityId() {
 		// TODO Auto-generated method stub
 		return super.getLatestEntityId();
 	}

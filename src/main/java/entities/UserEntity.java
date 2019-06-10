@@ -37,6 +37,17 @@ public class UserEntity {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userEntity")
 	private List<PostEntity> postEntities;
 
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userEntity")
+	private List<PostCommentEntity> postCommentEntities;
+
+	public List<PostCommentEntity> getPostCommentEntities() {
+		return postCommentEntities;
+	}
+
+	public void setPostCommentEntities(List<PostCommentEntity> postCommentEntities) {
+		this.postCommentEntities = postCommentEntities;
+	}
+
 	public List<PostEntity> getPostEntities() {
 		return postEntities;
 	}

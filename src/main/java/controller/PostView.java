@@ -9,6 +9,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import dto.Post;
+import entities.PostEntity;
 import services.PostService;
 import ultilities.SessionUtils;
 
@@ -23,11 +24,11 @@ public class PostView implements Serializable {
 	@EJB
 	PostService postService;
 
-	private List<Post> posts;
+	private List<PostEntity> posts;
 
 	@PostConstruct
 	public void init() {
-		posts = postService.findAll();
+		posts = postService.findAll();		
 	}
 
 	public String move() {
@@ -36,14 +37,14 @@ public class PostView implements Serializable {
 		return "PostDetail?faces-redirect=true&postId=" + postId;
 	}
 
-	public void upvotePost(Post post) {
+	public void upvotePost(PostEntity post) {
 		Integer userid = SessionUtils.getUserId();
 		if (userid != null) {
-			Post existingPost = posts.stream().filter(eachPost -> post.getId().equals(eachPost.getId())).findAny()
+			PostEntity existingPost = posts.stream().filter(eachPost -> post.getId().equals(eachPost.getId())).findAny()
 					.orElse(null);
 			if (existingPost != null) {
 				existingPost.setVote(existingPost.getVote() + 1);
-				postService.update(postService.toEntity(existingPost));
+				postService.update(existingPost);
 				System.out.println("Upvoted post with id of " + post.getId());
 			} else {
 				System.out.println("Could not upvote post with id of " + post.getId());
@@ -53,14 +54,14 @@ public class PostView implements Serializable {
 		}
 	}
 
-	public void downvotePost(Post post) {
+	public void downvotePost(PostEntity post) {
 		Integer userid = SessionUtils.getUserId();
 		if (userid != null) {
-			Post existingPost = posts.stream().filter(eachPost -> post.getId().equals(eachPost.getId())).findAny()
+			PostEntity existingPost = posts.stream().filter(eachPost -> post.getId().equals(eachPost.getId())).findAny()
 					.orElse(null);
 			if (existingPost != null) {
 				existingPost.setVote(existingPost.getVote() - 1);
-				postService.update(postService.toEntity(existingPost));
+				postService.update(existingPost);
 				System.out.println("Upvoted post with id of " + post.getId());
 			} else {
 				System.out.println("Could not upvote post with id of " + post.getId());
@@ -74,16 +75,16 @@ public class PostView implements Serializable {
 
 	}
 
-	public List<Post> getPosts() {
+	public PostService getPostService() {
+		return postService;
+	}
+
+	public List<PostEntity> getPosts() {
 		return posts;
 	}
 
-	public void setPosts(List<Post> posts) {
+	public void setPosts(List<PostEntity> posts) {
 		this.posts = posts;
-	}
-
-	public PostService getPostService() {
-		return postService;
 	}
 
 	public void setPostService(PostService postService) {

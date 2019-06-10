@@ -23,30 +23,30 @@ public class UserService extends GenericService<UserEntity, User> {
 		super(UserEntity.class);
 	}
 
-	@Override
-	public UserEntity toEntity(User bom) {
-		if (Objects.isNull(bom)) {
-			return null;
-		}
-		return new UserEntity(bom.getId(), bom.getUsername(), bom.getPassword(), bom.getFullname(), bom.getGender(),
-				bom.getEmail());
-	}
+//	@Override
+//	public UserEntity toEntity(User bom) {
+//		if (Objects.isNull(bom)) {
+//			return null;
+//		}
+//		return new UserEntity(bom.getId(), bom.getUsername(), bom.getPassword(), bom.getFullname(), bom.getGender(),
+//				bom.getEmail());
+//	}
+//
+//	@Override
+//	public User toBom(UserEntity entity) {
+//		if (Objects.isNull(entity)) {
+//			return null;
+//		}
+//		return new User(entity.getId(), entity.getUsername(), entity.getPassword(), entity.getFullname(),
+//				entity.getGender(), entity.getEmail());
+//	}
 
 	@Override
-	public User toBom(UserEntity entity) {
-		if (Objects.isNull(entity)) {
-			return null;
-		}
-		return new User(entity.getId(), entity.getUsername(), entity.getPassword(), entity.getFullname(),
-				entity.getGender(), entity.getEmail());
-	}
-
-	@Override
-	public User findById(Integer id) {
+	public UserEntity findById(Integer id) {
 		// TODO Auto-generated method stub
 		return super.findById(id);
 	}
-	
+
 	public UserEntity find(Integer id) {
 		return this.getEm().find(UserEntity.class, id);
 	}

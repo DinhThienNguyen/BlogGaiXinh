@@ -35,7 +35,7 @@ public class PostDetailView {
 	@EJB
 	PostCommentService postCommentService;
 
-	private Post post;
+	private PostEntity post;
 
 	private String comment;
 
@@ -55,11 +55,11 @@ public class PostDetailView {
 	}
 
 	public void upvoteComment(PostComment comment) {
-		PostComment existingComment = post.getComments().stream()
+		PostCommentEntity existingComment = post.getComments().stream()
 				.filter(eachComment -> comment.getId().equals(eachComment.getId())).findAny().orElse(null);
 		if (existingComment != null) {
 			existingComment.setVote(existingComment.getVote() + 1);
-			postCommentService.update(postCommentService.toEntity(existingComment));
+			postCommentService.update(existingComment);
 			System.out.println("Upvoted comment with id of " + comment.getId());
 		} else {
 			System.out.println("Could not upvote comment with id of " + comment.getId());
@@ -67,11 +67,11 @@ public class PostDetailView {
 	}
 
 	public void downvotevoteComment(PostComment comment) {
-		PostComment existingComment = post.getComments().stream()
+		PostCommentEntity existingComment = post.getComments().stream()
 				.filter(eachComment -> comment.getId().equals(eachComment.getId())).findAny().orElse(null);
 		if (existingComment != null) {
 			existingComment.setVote(existingComment.getVote() + 1);
-			postCommentService.update(postCommentService.toEntity(existingComment));
+			postCommentService.update(existingComment);
 			System.out.println("Upvoted comment with id of " + comment.getId());
 		} else {
 			System.out.println("Could not upvote comment with id of " + comment.getId());
@@ -82,7 +82,7 @@ public class PostDetailView {
 		Integer userid = SessionUtils.getUserId();
 		if (userid != null) {
 			post.setVote(post.getVote() + 1);
-			postService.update(postService.toEntity(post));
+			postService.update(post);
 			System.out.println("Upvoted post with id of " + post.getId());
 		} else {
 			try {
@@ -101,7 +101,7 @@ public class PostDetailView {
 		Integer userid = SessionUtils.getUserId();
 		if (userid != null) {
 			post.setVote(post.getVote() - 1);
-			postService.update(postService.toEntity(post));
+			postService.update(post);
 			System.out.println("Downvoted post with id of " + post.getId());
 		} else {
 			try {
@@ -122,15 +122,13 @@ public class PostDetailView {
 		if (userid != null) {
 			PostCommentEntity postCommentEntity = new PostCommentEntity();
 			postCommentEntity.setContent(comment);
-			UserEntity userEntity = userService.find(userid);
-			postCommentEntity.setUserEntity(userEntity);
-//			postCommentEntity.setPostEntity(postEntity);
-			
-			List<PostEntity> postEntities = userEntity.getPostEntities();
-			
+			postCommentEntity.setPostEntity(post);
+			postCommentEntity.setCreateTimestamp(System.currentTimeMillis() / 1000L);
+			postCommentEntity.setUserEntity(userService.findById(userid));
 			postCommentEntity.setVote(0);
 			postCommentEntity = postCommentService.save(postCommentEntity);
-//			post.getComments().add(0, postCommentService.toBom(commentEntity));
+			post.getComments().add(0, postCommentEntity);
+			comment = "";
 		} else {
 			try {
 				FacesContext.getCurrentInstance().getExternalContext().redirect("SignUp.xhtml");
@@ -140,11 +138,11 @@ public class PostDetailView {
 		}
 	}
 
-	public Post getPost() {
+	public PostEntity getPost() {
 		return post;
 	}
 
-	public void setPost(Post post) {
+	public void setPost(PostEntity post) {
 		this.post = post;
 	}
 

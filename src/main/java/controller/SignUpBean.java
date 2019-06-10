@@ -12,6 +12,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import entities.UserEntity;
 import services.UserService;
 import user.User;
 
@@ -125,14 +126,14 @@ public class SignUpBean implements Serializable {
 
 	public void signUp() {
 		if (validate()) {
-			User user = new User();
+			UserEntity user = new UserEntity();
 			user.setEmail(email);
 			user.setFullname(fullname);
 			user.setGender(gender);
 			user.setPassword(password);
 			user.setUsername(username);
 			
-			userService.save(userService.toEntity(user));
+			userService.save(user);
 			try {
 				FacesContext.getCurrentInstance().getExternalContext().redirect("MainPage.xhtml");
 			} catch (IOException e) {
