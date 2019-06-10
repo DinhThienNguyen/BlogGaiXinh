@@ -62,41 +62,41 @@ public class UserDetailController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
 		String userID = req.getParameter("userID");
 		Integer userIDLogin = (Integer) req.getSession().getAttribute("userid");
-				
-		if (userIDLogin == null && userID ==null ) {
-			// Chuyển qua trang login
-			RequestDispatcher dispatcher = req.getRequestDispatcher("userDetailError.jsp");
-			dispatcher.forward(req, response);
-		}
-		
-		if (userIDLogin != null && userID == null ) {
-			userID = userIDLogin.toString();
-		}
-		
-		List<String> imagePaths = new LinkedList<>();
-		UserEntity userEntity = userService.find(Integer.parseInt(userID));
 
-		if (userEntity == null) {
-			RequestDispatcher dispatcher = req.getRequestDispatcher("userDetailError.jsp");
+		if (userIDLogin == null && userID == null) {
+			RequestDispatcher dispatcher = req.getRequestDispatcher("userDetailErr.jsp");
 			dispatcher.forward(req, response);
 		}
 
-		List<PostEntity> postEntities = userEntity.getPostEntities();
-
-		if (postEntities != null && !postEntities.isEmpty()) {
-			for (PostEntity post : postEntities) {
-				System.out.println(post.getId());
-				PostImageEntity image = postImageService.findById(Integer.valueOf(post.getImageEntity().getId()));
-				if (image != null) {
-					String url = req.getContextPath() + IMAGE_DIRECTORY + image.getName();
-					imagePaths.add(url);
-				}
-			}
-		}
-
-		req.setAttribute("userIDLogin", userIDLogin);
-		req.setAttribute("userID", userID);
-		req.setAttribute("imagePaths", imagePaths);
+//		if (userIDLogin != null && userID == null) {
+//			userID = userIDLogin.toString();
+//		}
+//		
+//		System.out.println(userID);
+		
+//		List<String> imagePaths = new LinkedList<>();
+//		UserEntity userEntity = userService.find(Integer.parseInt(userID));
+//
+//		if (userEntity == null) {
+//			RequestDispatcher dispatcher = req.getRequestDispatcher("userDetail.jsp");
+//			dispatcher.forward(req, response);
+//		}
+//
+//		List<PostEntity> postEntities = userEntity.getPostEntities();
+//
+//		if (postEntities != null && !postEntities.isEmpty()) {
+//			for (PostEntity post : postEntities) {
+//				PostImageEntity image = postImageService.findById(Integer.valueOf(post.getImageEntity().getId()));
+//				if (image != null) {
+//					String url = req.getContextPath() + IMAGE_DIRECTORY + image.getName();
+//					imagePaths.add(url);
+//				}
+//			}
+//		}
+//
+//		req.setAttribute("userIDLogin", userIDLogin);
+//		req.setAttribute("userID", userID);
+//		req.setAttribute("imagePaths", imagePaths);
 
 		//
 		// System.out.print(userEntity.getPostEntities());
