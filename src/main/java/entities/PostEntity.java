@@ -40,7 +40,7 @@ public class PostEntity {
 	@JoinColumn(name = "image_id", nullable = true)
 	private PostImageEntity imageEntity;
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "postEntity")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "postEntity")
 	private List<PostCommentEntity> comments;
 
 	public PostEntity(Integer id, String title, Long createTimestamp, Integer vote, UserEntity userEntity,

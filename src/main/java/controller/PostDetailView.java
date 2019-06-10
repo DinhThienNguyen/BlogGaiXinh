@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -14,6 +15,7 @@ import org.picketbox.util.StringUtil;
 import dto.Post;
 import dto.PostComment;
 import entities.PostCommentEntity;
+import entities.PostEntity;
 import entities.UserEntity;
 import services.PostCommentService;
 import services.PostService;
@@ -123,7 +125,9 @@ public class PostDetailView {
 			UserEntity userEntity = userService.find(userid);
 			postCommentEntity.setUserEntity(userEntity);
 //			postCommentEntity.setPostEntity(postEntity);
-
+			
+			List<PostEntity> postEntities = userEntity.getPostEntities();
+			
 			postCommentEntity.setVote(0);
 			postCommentEntity = postCommentService.save(postCommentEntity);
 //			post.getComments().add(0, postCommentService.toBom(commentEntity));
