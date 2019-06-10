@@ -2,7 +2,6 @@ package entities;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,17 +25,17 @@ public class PostEntity {
 	@Column(name = "title")
 	private String title;
 
-	@Column(name = "timestamp")
+	@Column(name = "createtimestamp")
 	private Long createTimestamp;
 
 	@Column(name = "vote")
 	private Integer vote;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = true)
 	private UserEntity userEntity;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne
 	@JoinColumn(name = "image_id", nullable = true)
 	private PostImageEntity imageEntity;
 
@@ -79,7 +78,7 @@ public class PostEntity {
 		return createTimestamp;
 	}
 
-	public void setTimestamp(Long createTimestamp) {
+	public void setCreateTimestamp(Long createTimestamp) {
 		this.createTimestamp = createTimestamp;
 	}
 
@@ -113,6 +112,10 @@ public class PostEntity {
 
 	public void setComments(List<PostCommentEntity> comments) {
 		this.comments = comments;
+	}
+	
+	public String getVoteAsString() {
+		return String.valueOf(vote);
 	}
 
 }

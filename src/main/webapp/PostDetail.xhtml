@@ -64,7 +64,7 @@
 		</div>
 		<div>
 			<p:graphicImage styleClass="img-fluid" value="#{imageStreamer.image}">
-				<f:param name="imageId" value="#{postDetailView.post.postImage.id}" />
+				<f:param name="imageId" value="#{postDetailView.post.imageEntity.id}" />
 			</p:graphicImage>
 		</div>
 
@@ -84,19 +84,22 @@
 				<div class="form-group">
 					<h:outputLabel style="margin-top:10px;" value="Bình luận" />
 					<p:inputTextarea autoResize="false" styleClass="form-control" value="#{postDetailView.comment}" />
-					<p:commandButton update="comment" value="Đăng" action="#{postDetailView.saveComment}" style="margin-right:20px;" />
+					<p:commandButton update="form" value="Đăng" action="#{postDetailView.saveComment}"
+						style="margin-right:20px;" />
 				</div>
 
-				<p:dataView id="comment" style="margin-top: 3rem;" var="comment" value="#{postDetailView.post.comments}" rows="12"
+				<p:dataView style="margin-top: 3rem;" var="comment" value="#{postDetailView.post.comments}" rows="12"
 					paginator="true" rowsPerPageTemplate="6,12,16">
 
 					<p:dataViewListItem>
 						<h:panelGrid columns="1" style="width:100%">
 
 							<p:outputPanel>
-								<h:panelGrid columns="1" cellpadding="1">
-									<h:outputText value="#{comment.user.fullname}" style="font-weight: bold" />
-								</h:panelGrid>
+								<div>
+									<h:outputText value="#{comment.userEntity.fullname}" style="font-weight: bold" />
+									<h:outputText style="margin-left: 1em; font-size: .8em;"
+										value="#{comment.createTimestampAsString}" />
+								</div>
 							</p:outputPanel>
 							<p:outputPanel>
 								<h:panelGrid columns="1" cellpadding="1">

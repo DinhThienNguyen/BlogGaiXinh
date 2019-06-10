@@ -1,16 +1,15 @@
 package entities;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import ultilities.TimeAgo;
 
 @Entity
 @Table(name = "comments")
@@ -26,7 +25,10 @@ public class PostCommentEntity {
 	@Column(name = "vote")
 	private Integer vote;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@Column(name = "createtimestamp")
+	private Long createTimestamp;
+
+	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = true)
 	private UserEntity userEntity;
 
@@ -84,6 +86,22 @@ public class PostCommentEntity {
 
 	public void setPostEntity(PostEntity postEntity) {
 		this.postEntity = postEntity;
+	}
+
+	public Long getCreateTimestamp() {
+		return createTimestamp;
+	}
+
+	public void setCreateTimestamp(Long createTimestamp) {
+		this.createTimestamp = createTimestamp;
+	}
+
+	public String getVoteAsString() {
+		return String.valueOf(vote);
+	}
+
+	public String getCreateTimestampAsString() {
+		return TimeAgo.toDuration(createTimestamp);
 	}
 
 }

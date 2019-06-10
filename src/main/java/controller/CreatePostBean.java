@@ -14,7 +14,9 @@ import org.primefaces.model.UploadedFile;
 
 import dto.Post;
 import dto.PostImage;
+import entities.PostEntity;
 import entities.PostImageEntity;
+import entities.UserEntity;
 import services.PostImageService;
 import services.PostService;
 import services.UserService;
@@ -56,30 +58,29 @@ public class CreatePostBean {
 		UploadedFile file = event.getFile();
 		imageContents = file.getContents();
 
-		PostImage latestImage = postImageService.getLatestEntityId();
+		PostImageEntity latestImage = postImageService.getLatestEntityId();
 
-		PostImage postImage = new PostImage();		
-		postImage.setName(latestImage.getId() + file.getContentType().replaceAll("image/", "."));
+		PostImageEntity newPostImage = new PostImageEntity();		
+		newPostImage.setName(latestImage.getId() + file.getContentType().replaceAll("image/", "."));
 		try (FileOutputStream fos = new FileOutputStream(
-				System.getProperty("jboss.server.data.dir") + "\\images\\" + postImage.getName())) {
+				System.getProperty("jboss.server.data.dir") + "\\images\\" + newPostImage.getName())) {
 			fos.write(imageContents);
 		} catch (IOException e) {
 			e.printStackTrace();
 			return;
 		}
-		PostImageEntity postImageEntity = postImageService.save(postImageService.toEntity(postImage));
-		postImage.setId(postImageEntity.getId());
+		newPostImage = postImageService.save(newPostImage);		
 
-		Post post = new Post();
+		PostEntity post = new PostEntity();
 		post.setTitle(title);
 		post.setCreateTimestamp(System.currentTimeMillis() / 1000L);
 		post.setVote(0);
 
-		User user = userService.findById(SessionUtils.getUserId());
-		post.setUser(user);
+		UserEntity user = userService.findById(SessionUtils.getUserId());
+		post.setUserEntity(user);
 
-		post.setPostImage(postImage);
-		postService.save(postService.toEntity(post));
+		post.setImageEntity(newPostImage);
+		postService.save(post);
 
 		System.out.println("uploaded " + file.getFileName());
 		try {

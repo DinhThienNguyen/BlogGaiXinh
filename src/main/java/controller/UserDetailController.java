@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import dto.Post;
 import dto.PostImage;
 import entities.PostEntity;
+import entities.PostImageEntity;
 import entities.UserEntity;
 import services.PostImageService;
 import services.PostService;
@@ -85,7 +86,7 @@ public class UserDetailController extends HttpServlet {
 		if (postEntities != null && !postEntities.isEmpty()) {
 			for (PostEntity post : postEntities) {
 				System.out.println(post.getId());
-				PostImage image = postImageService.findById(Integer.valueOf(post.getImageEntity().getId()));
+				PostImageEntity image = postImageService.findById(Integer.valueOf(post.getImageEntity().getId()));
 				if (image != null) {
 					String url = req.getContextPath() + IMAGE_DIRECTORY + image.getName();
 					imagePaths.add(url);
