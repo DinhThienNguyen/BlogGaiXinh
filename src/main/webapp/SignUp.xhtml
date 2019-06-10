@@ -16,8 +16,16 @@
 </h:head>
 
 <style type="text/css">
+	body {
+		background-color: #dae0e6;
+		margin-top: 5rem;
+	}
+
 	.container {
-		margin-top: 2rem;
+		background-color: white;
+		margin-top: .5rem;
+		padding-top: 1rem;
+		padding-bottom: 1rem;
 	}
 </style>
 
@@ -32,8 +40,8 @@
 		<h:form id="display">
 
 
-			<div class="form-group">
-				<h:outputLabel value="Vui lòng đăng ký để sử dụng các tính năng của web" />
+			<div class="form-group d-flex justify-content-center">
+				<h3>Vui lòng đăng ký để có thể đăng bài, bình luận và like bài viết!</h3>
 			</div>
 
 			<div class="form-group">
@@ -41,7 +49,8 @@
 				<p:inputText styleClass="form-control" value="#{signUpBean.username}">
 					<f:ajax />
 				</p:inputText>
-				<h:outputLabel rendered="#{signUpBean.isUsernameTaken}" style="color:red;" value="Tên tài khoản đã có người sử dụng" />
+				<h:outputLabel rendered="#{signUpBean.isUsernameTaken}" style="color:red;"
+					value="Tên tài khoản đã có người sử dụng" />
 			</div>
 
 			<div class="form-group">
@@ -58,8 +67,8 @@
 
 			<div class="form-group">
 				<h:outputLabel value="Giới tính" />
-				<p:selectOneMenu styleClass="form-control" id="gender" value="#{signUpBean.gender}" var="p">
-					<f:selectItems value="#{signUpBean.genders}" var="gender" itemLabel="#{gender}" itemValue="#{gender}" />
+				<p:selectOneMenu styleClass="form-control" id="gender" value="#{signUpBean.gender}">
+					<f:selectItems value="#{signUpBean.genders}" itemValue="#{gender}" />
 				</p:selectOneMenu>
 			</div>
 
@@ -68,10 +77,12 @@
 				<p:inputText styleClass="form-control" value="#{signUpBean.email}">
 					<f:ajax />
 				</p:inputText>
-				<h:outputLabel rendered="#{signUpBean.isEmailFormatIncorrect}" style="color:red;" value="Định dạng email phải theo xyz@xyz.xyz" />
+				<h:outputLabel rendered="#{signUpBean.isEmailFormatIncorrect}" style="color:red;"
+					value="Định dạng email phải theo xyz@xyz.xyz" />
 			</div>
 
-			<p:commandButton update="display" style="font-family: 'Roboto', 'Tahoma';" value="Đăng ký" actionListener="#{signUpBean.signUp}" />
+			<p:commandButton update="display" style="font-family: 'Roboto', 'Tahoma';" value="Đăng ký"
+				actionListener="#{signUpBean.signUp}" />
 
 		</h:form>
 	</div>

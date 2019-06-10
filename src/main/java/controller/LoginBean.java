@@ -24,6 +24,8 @@ public class LoginBean implements Serializable {
 	private String msg;
 	private String username;
 
+	private boolean isLoginInfoIncorrect = false;
+
 	@PostConstruct
 	public void init() {
 		username = "";
@@ -54,33 +56,34 @@ public class LoginBean implements Serializable {
 		this.username = username;
 	}
 
+	public boolean getIsLoginInfoIncorrect() {
+		return isLoginInfoIncorrect;
+	}
+
+	public void setLoginInfoIncorrect(boolean isLoginInfoIncorrect) {
+		this.isLoginInfoIncorrect = isLoginInfoIncorrect;
+	}
+
 	@EJB
 	UserService userService;
 
 	// validate login
 	public void validateUsernamePassword() {
 		UserEntity userEntity = userService.find(username, password);
-		if (!userEntity.equals(null)) {
+		if (userEntity != null) {
+			isLoginInfoIncorrect = false;
 			HttpSession session = SessionUtils.getSession();
 			session.setAttribute("username", username);
 			session.setAttribute("userid", userEntity.getId());
-			System.out.println("Set username and password on SessionUtil");
 			try {
 				FacesContext.getCurrentInstance().getExternalContext().redirect("MainPage.xhtml");
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} else {
-//			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
-//					"Incorrect Username and Passowrd", "Please enter correct username and Password"));
+			isLoginInfoIncorrect = true;
 			System.out.println("incorrect username");
-			try {
-				FacesContext.getCurrentInstance().getExternalContext().redirect("MainPage.xhtml");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+
 		}
 	}
 
@@ -89,7 +92,7 @@ public class LoginBean implements Serializable {
 		username = "";
 		password = "";
 		HttpSession session = SessionUtils.getSession();
-		session.invalidate();		
+		session.invalidate();
 		System.out.println(SessionUtils.getUserId());
 		try {
 			FacesContext.getCurrentInstance().getExternalContext().redirect("MainPage.xhtml");

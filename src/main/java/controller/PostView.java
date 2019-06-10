@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import dto.Post;
@@ -13,7 +13,7 @@ import services.PostService;
 import ultilities.SessionUtils;
 
 @javax.faces.bean.ManagedBean
-@SessionScoped
+@ViewScoped
 public class PostView implements Serializable {
 	/**
 	 * 

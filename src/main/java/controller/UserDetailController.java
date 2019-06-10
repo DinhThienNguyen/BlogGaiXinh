@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dto.Post;
 import dto.PostImage;
+import entities.PostEntity;
 import entities.UserEntity;
 import services.PostImageService;
 import services.PostService;
@@ -25,7 +26,7 @@ public class UserDetailController extends HttpServlet {
 
 	@EJB
 	PostService postService;
-	
+
 	@EJB
 	UserService userService;
 
@@ -33,7 +34,7 @@ public class UserDetailController extends HttpServlet {
 	PostImageService postImageService;
 
 	private static final String IMAGE_DIRECTORY = "/statics/images/";
-	
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -56,31 +57,53 @@ public class UserDetailController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
 
 //		List<Post> posts = postService.findAll();
-//		User user = userService.findById(7);
+
+//		UserEntity userEntity = userService.find(7);
+//		//
+//		//
+//		System.out.println(userEntity);
+//		System.out.print(userEntity.getEmail());
+//
+//		System.out.print(userEntity.getPostEntities());
 //		List<String> imagePaths = new ArrayList();
-//	
-//		List<Post> posts = user.getPosts();
-//		if(posts == null)
-//			System.out.println("empty");
-//		
-//		else {
-//			for(Post post : posts) {
-//				PostImage image = postImageService.findById(Integer.valueOf(post.getId()));
-//				
-//				if(image == null) {
-//					System.out.println("nuled");
-//					continue;
-//				}
-//					
-//				String url = req.getContextPath() +  IMAGE_DIRECTORY + image.getName();
-//				imagePaths.add(url);
+//
+//		// List<PostEntity> posts = userEntity.getPostEntities();
+//		// if(posts == null)
+//		// System.out.println("empty");
+//		//
+//		// else {
+//		// for(PostEntity post : posts) {
+//		// PostImage image = postImageService.findById(Integer.valueOf(post.getId()));
+//		//
+//		// if(image == null) {
+//		// System.out.println("nuled");
+//		// continue;
+//		// }
+//		//
+//		// String url = req.getContextPath() + IMAGE_DIRECTORY + image.getName();
+//		// imagePaths.add(url);
+//		// }
+//		//
+//		// req.setAttribute("imagePaths", imagePaths);
+//		//
+//		// }
+//		//
+//		//
+//
+//		for (Post post : posts) {
+//			PostImage image = postImageService.findById(Integer.valueOf(post.getId()));
+//
+//			if (image == null) {
+//				System.out.println("null");
+//				continue;
 //			}
 //
-//			req.setAttribute("imagePaths", imagePaths);
-//
+//			String url = req.getContextPath() + IMAGE_DIRECTORY + image.getName();
+//			imagePaths.add(url);
 //		}
-		
-		
+//
+//		req.setAttribute("imagePaths", imagePaths);
+
 		//
 		// if (req.getParameter("employeeId") != null)
 		// {

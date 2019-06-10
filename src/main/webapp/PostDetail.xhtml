@@ -59,13 +59,14 @@
 		<ui:include src="header.xhtml" />
 	</ui:insert>
 	<div class="container">
-
-		<h:outputLabel styleClass="title" value="#{postDetailView.post.title}" />
-		
+		<div>
+			<h:outputLabel styleClass="title" value="#{postDetailView.post.title}" />
+		</div>
+		<div>
 			<p:graphicImage styleClass="img-fluid" value="#{imageStreamer.image}">
 				<f:param name="imageId" value="#{postDetailView.post.postImage.id}" />
 			</p:graphicImage>
-		
+		</div>
 
 		<h:form id="form">
 			<div class="form-group">
@@ -83,11 +84,11 @@
 				<div class="form-group">
 					<h:outputLabel style="margin-top:10px;" value="Bình luận" />
 					<p:inputTextarea autoResize="false" styleClass="form-control" value="#{postDetailView.comment}" />
-					<p:commandButton value="Đăng" action="#{postDetailView.saveComment}" style="margin-right:20px;"  />
+					<p:commandButton update="comment" value="Đăng" action="#{postDetailView.saveComment}" style="margin-right:20px;" />
 				</div>
 
-				<p:dataView style="margin-top: 3rem;" var="comment" value="#{postDetailView.post.comments}" rows="12" paginator="true"
-					rowsPerPageTemplate="6,12,16">
+				<p:dataView id="comment" style="margin-top: 3rem;" var="comment" value="#{postDetailView.post.comments}" rows="12"
+					paginator="true" rowsPerPageTemplate="6,12,16">
 
 					<p:dataViewListItem>
 						<h:panelGrid columns="1" style="width:100%">
@@ -108,10 +109,10 @@
 								<h:panelGrid columns="1" cellpadding="1">
 
 									<p:commandLink update="upvote" action="#{postDetailView.upvotePost}">
-										<h:outputText value="#{comment.upvoteAsString}" id="upvote" />
+										<h:outputText value="#{comment.voteAsString}" id="upvote" />
 									</p:commandLink>
 									<p:commandLink update="downvote" action="#{postDetailView.downvotePost}">
-										<h:outputText value="#{comment.downvoteAsString}" id="downvote" />
+										<h:outputText value="#{comment.voteAsString}" id="downvote" />
 									</p:commandLink>
 
 								</h:panelGrid>
