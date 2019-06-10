@@ -34,7 +34,7 @@
 						<div>
 							<h2 class="name-profile">John Doe</h2>
 							<c:if test="${(userIDLogin != null) && (userIDLogin == userID)}">
-								<a class="btn btn-default edit-profile" href="#">Edit
+								<a class="btn btn-default edit-profile" href="userEditController">Edit
 									Profile</a>
 							</c:if>
 

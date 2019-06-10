@@ -27,7 +27,6 @@ import ultilities.SessionUtils;
 @WebServlet("/userEditController")
 public class UserEditController extends HttpServlet {
 
-
 	@EJB
 	UserService userService;
 	
@@ -39,18 +38,8 @@ public class UserEditController extends HttpServlet {
 		String email = req.getParameter("email");
 		String bio = req.getParameter("bio");
 		String gender = req.getParameter("gender");
-		
-		System.out.println(fullname);
-		System.out.println(username);
-		System.out.println(email);
-		
-		System.out.println(bio);
-		System.out.println(gender);
-		
-//		UserEntity userEntity = new UserEntity();
-		
-		UserEntity userEntity = userService.find(1);
-		
+	
+		UserEntity userEntity = userService.find(1);	
 		userEntity.setFullname(fullname);
 		userEntity.setEmail(email);
 		userEntity.setBio(bio);
