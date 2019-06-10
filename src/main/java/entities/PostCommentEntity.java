@@ -30,7 +30,7 @@ public class PostCommentEntity {
 	@JoinColumn(name = "user_id", nullable = true)
 	private UserEntity userEntity;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "post_id")
 	private PostEntity postEntity;
 
