@@ -19,7 +19,7 @@
 
 	<div class="container container-user">
 
-		<div class="container" style="margin-top: 30px">
+		<div style="margin-top: 30px">
 			<div class="row">
 
 				<div class="box-change col-xs-12">
