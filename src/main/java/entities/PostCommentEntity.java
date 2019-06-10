@@ -31,7 +31,7 @@ public class PostCommentEntity {
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = true)
 	private UserEntity userEntity;
-
+	
 	@ManyToOne
 	@JoinColumn(name = "post_id")
 	private PostEntity postEntity;

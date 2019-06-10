@@ -14,17 +14,17 @@ insert into images(name) values('9.jpg');
 insert into images(name) values('10.jpg');
 
 
-insert into users(fullname, email, gender, username, password) values('Le Van A', 'thien1@gmail.com', 'Male', 'LeVanA', 'levana');
-insert into users(fullname, email, gender, username, password) values('Le Van B', 'thien2@gmail.com', 'Male', 'LeVanB', 'levanb');
-insert into users(fullname, email, gender, username, password) values('Le Van C', 'thien3@gmail.com', 'Male', 'LeVanC', 'levanc');
-insert into users(fullname, email, gender, username, password) values('Le Van D', 'thien4@gmail.com', 'Male', 'LeVanD', 'levand');
-insert into users(fullname, email, gender, username, password) values('Le Van E', 'thien5@gmail.com', 'Male', 'LeVanE', 'levane');
-insert into users(fullname, email, gender, username, password) values('Le Van F', 'thien6@gmail.com', 'Male', 'LeVanF', 'levanf');
-insert into users(fullname, email, gender, username, password) values('Le Van G', 'thien7@gmail.com', 'Male', 'LeVanG', 'levang');
-insert into users(fullname, email, gender, username, password) values('Le Van H', 'thien8@gmail.com', 'Male', 'LeVanH', 'levanh');
-insert into users(fullname, email, gender, username, password) values('Le Van I', 'thien9@gmail.com', 'Male', 'LeVanI', 'levani');
-insert into users(fullname, email, gender, username, password) values('Le Van K', 'thien10@gmail.com', 'Male', 'LeVanK', 'levank');
-insert into users(fullname, email, gender, username, password) values('USerTest', 'aaaan10@gmail.com', 'Male', 'user', '123456');
+insert into users(bio, fullname, email, gender, username, password) values('Chuyện bắt đầu nẩy nở, đòi hỏi phải có trí lực và sự dẻo dai. Mọi điều khởi nguồn từ cốt cách của tâm hồn, tâm trí tương thông tấm lòng luôn rộng mở.' ,'Le Van A', 'thien1@gmail.com', 'male', 'LeVanA', 'levana');
+insert into users(fullname, email, gender, username, password) values('Le Van B', 'thien2@gmail.com', 'male', 'LeVanB', 'levanb');
+insert into users(fullname, email, gender, username, password) values('Le Van C', 'thien3@gmail.com', 'male', 'LeVanC', 'levanc');
+insert into users(bio, fullname, email, gender, username, password) values('Chuyện bắt đầu nẩy nở, đòi hỏi phải có trí lực và sự dẻo dai. Mọi điều khởi nguồn từ cốt cách của tâm hồn, tâm trí tương thông tấm lòng luôn rộng mở.', 'Le Van D', 'thien4@gmail.com', 'male', 'LeVanD', 'levand');
+insert into users(fullname, email, gender, username, password) values('Le Van E', 'thien5@gmail.com', 'female', 'LeVanE', 'levane');
+insert into users(fullname, email, gender, username, password) values('Le Van F', 'thien6@gmail.com', 'female', 'LeVanF', 'levanf');
+insert into users(fullname, email, gender, username, password) values('Le Van G', 'thien7@gmail.com', 'male', 'LeVanG', 'levang');
+insert into users(fullname, email, gender, username, password) values('Le Van H', 'thien8@gmail.com', 'male', 'LeVanH', 'levanh');
+insert into users(fullname, email, gender, username, password) values('Le Van I', 'thien9@gmail.com', 'male', 'LeVanI', 'levani');
+insert into users(fullname, email, gender, username, password) values('Le Van K', 'thien10@gmail.com', 'female', 'LeVanK', 'levank');
+insert into users(fullname, email, gender, username, password) values('USerTest', 'aaaan10@gmail.com', 'female', 'user', '123456');
 
 insert into posts(vote, createtimestamp, title, image_id, user_id) values(2, 1558866953, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 3, 5);
 insert into posts(vote, createtimestamp, title, image_id, user_id) values(7, 1558866953, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 1, 6);

@@ -19,6 +19,16 @@
 
 	<div class="container container-user">
 
+		<c:if test="${status == 'success'}">
+			<div class="alert alert-success" style="margin-top: 30px"
+				role="alert">Cập nhật thành công.</div>
+		</c:if>
+		
+		<c:if test="${status == 'failure'}">
+			<div class="alert alert-danger" style="margin-top: 30px"
+				role="alert">Không thể cập nhật.</div>
+		</c:if>
+
 		<div style="margin-top: 30px">
 			<div class="row">
 
@@ -39,7 +49,8 @@
 						<!-- Tab panes -->
 						<div class="tab-content">
 							<div class="tab-pane active" id="home-v">
-								<form class="form-horizontal">
+								<form class="form-horizontal" action="userEditController"
+									method="POST">
 									<fieldset>
 
 										<div class="form-group">
@@ -49,7 +60,7 @@
 												id="profile-image1" class="img-circle user-image-tab">
 											</label>
 											<div class="col-md-6">
-												<span class="lable-tab">mtSiniChi</span>
+												<span class="lable-tab">${userEntity.getUsername()}</span>
 
 											</div>
 										</div>
@@ -60,7 +71,8 @@
 												tên</label>
 											<div class="col-md-6">
 												<input id="fullName" name="fullName" type="text"
-													placeholder="" class="form-control input-md">
+													placeholder="" value="${userEntity.getFullname()}"
+													class="form-control input-md">
 
 											</div>
 										</div>
@@ -71,7 +83,8 @@
 												khoản</label>
 											<div class="col-md-6">
 												<input id="username" name="username" type="text"
-													placeholder="" class="form-control input-md">
+													placeholder="" disabled value="${userEntity.getUsername()}"
+													class="form-control input-md">
 
 											</div>
 										</div>
@@ -81,6 +94,7 @@
 											<label class="col-md-3 control-label" for="email">Email</label>
 											<div class="col-md-6">
 												<input id="email" name="email" type="text" placeholder=""
+													value="${userEntity.getEmail()}"
 													class="form-control input-md">
 
 											</div>
@@ -90,7 +104,7 @@
 										<div class="form-group">
 											<label class="col-md-3 control-label" for="bio">Bio</label>
 											<div class="col-md-6">
-												<textarea class="form-control" id="bio" name="bio"></textarea>
+												<textarea class="form-control" id="bio" name="bio">${userEntity.getBio()}</textarea>
 											</div>
 										</div>
 
@@ -100,9 +114,13 @@
 												tính</label>
 											<div class="col-md-3">
 												<select id="gender" name="gender" class="form-control">
-													<option value="0">Nam</option>
-													<option value="1">Nữ</option>
-													<option value="2">Khác</option>
+													<option value="select"
+														${userEntity.getGender() == 'select' ? 'selected' : ''}>Không
+														xác định</option>
+													<option value="male"
+														${userEntity.getGender() == 'male' ? 'selected' : ''}>Nam</option>
+													<option value="female"
+														${userEntity.getGender() == 'female' ? 'selected' : ''}>Nữ</option>
 												</select>
 											</div>
 										</div>

@@ -34,6 +34,9 @@ public class UserEntity {
 	@Column(name = "email")
 	private String email;
 
+	@Column(name = "bio")
+	private String bio;
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userEntity")
 	private List<PostEntity> postEntities;
 
@@ -50,6 +53,14 @@ public class UserEntity {
 
 	public List<PostEntity> getPostEntities() {
 		return postEntities;
+	}
+
+	public String getBio() {
+		return bio;
+	}
+
+	public void setBio(String bio) {
+		this.bio = bio;
 	}
 
 	public void setPostEntities(List<PostEntity> postEntities) {
