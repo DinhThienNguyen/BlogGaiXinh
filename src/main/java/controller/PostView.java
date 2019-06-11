@@ -67,10 +67,10 @@ public class PostView implements Serializable {
 			}
 			upvotedPost = postService.update(upvotedPost);
 			for (int index = 0; index < posts.size(); index++) {
-			    if(posts.get(index).getId() == upvotedPost.getId()){
-			        posts.set(index, upvotedPost);
-			        break;
-			    }
+				if (posts.get(index).getId() == upvotedPost.getId()) {
+					posts.set(index, upvotedPost);
+					break;
+				}
 			}
 			System.out.println("Upvoted post with id of " + post.getId());
 		} else {
@@ -82,12 +82,21 @@ public class PostView implements Serializable {
 		}
 	}
 
+	public void moveToUser(PostEntity postEntity) {
+		try {
+			FacesContext.getCurrentInstance().getExternalContext()
+					.redirect("userDetailController?userID=" + postEntity.getUserEntity().getId());
+		} catch (IOException e) {
+
+		}
+	}
+
 	public void downvotePost(PostEntity post) {
 		Integer userid = SessionUtils.getUserId();
 		if (userid != null) {
 			PostEntity downvotedPost = postService.findById(post.getId());
-			UserEntity userEntity = downvotedPost.getDownvotedUser().stream().filter(user -> userid.equals(user.getId()))
-					.findAny().orElse(null);
+			UserEntity userEntity = downvotedPost.getDownvotedUser().stream()
+					.filter(user -> userid.equals(user.getId())).findAny().orElse(null);
 			if (userEntity != null) {
 				downvotedPost.setVote(downvotedPost.getVote() + 1);
 				downvotedPost.getDownvotedUser().remove(userEntity);
@@ -104,10 +113,10 @@ public class PostView implements Serializable {
 			}
 			downvotedPost = postService.update(downvotedPost);
 			for (int index = 0; index < posts.size(); index++) {
-			    if(posts.get(index).getId() == downvotedPost.getId()){
-			        posts.set(index, downvotedPost);
-			        break;
-			    }
+				if (posts.get(index).getId() == downvotedPost.getId()) {
+					posts.set(index, downvotedPost);
+					break;
+				}
 			}
 			System.out.println("Downvoted post with id of " + post.getId());
 		} else {

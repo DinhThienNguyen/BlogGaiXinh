@@ -191,6 +191,15 @@ public class PostDetailView {
 		}
 	}
 
+	public void moveToUser() {
+		try {
+			FacesContext.getCurrentInstance().getExternalContext()
+					.redirect("userDetailController?userID=" + post.getUserEntity().getId());
+		} catch (IOException e) {
+
+		}
+	}
+	
 	public PostEntity getPost() {
 		return post;
 	}
