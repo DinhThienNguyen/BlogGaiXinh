@@ -2,7 +2,7 @@
 <!DOCTYPE html
 	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:jsf="http://xmlns.jcp.org/jsf">
 <h:head>
 	<!-- Required meta tags -->
 	<meta charset="utf-8" />
@@ -36,8 +36,7 @@
 
 	.card-header-main {
 		height: 34px;
-		background:
-			url(https://www.redditstatic.com/desktop2x/img/id-cards/home-banner@2x.png) center center/cover no-repeat rgb(0, 121, 211);
+
 		border-radius: 4px 4px 0px 0px;
 	}
 
@@ -107,17 +106,28 @@
 									</h:panelGrid>
 								</p:commandLink>
 
+								 
+									<div jsf:id="voteSection">
+										<p:commandButton rendered="#{!postView.isPostUpvoted(post)}" id="upvoteButton"
+											update="voteSection" value="Thích" action="#{postView.upvotePost(post)}"
+											style="margin-right:20px;" />
+										<p:commandButton rendered="#{postView.isPostUpvoted(post)}"
+											id="coloredUpvoteButton" update="voteSection" value="Thích"
+											action="#{postView.upvotePost(post)}"
+											style="margin-right:20px; background-color: rgb(255, 69, 0);" />
 
-								<div>
-									<p:commandButton id="upvoteButton" update="upvoteButton vote downvoteButton" value="Thích"
-										action="#{postView.upvotePost(post)}" style="#{postView.upvoteButtonStyle}"/>
-																									
-									<h:outputText style="margin-right:20px;" value="#{post.voteAsString}" id="vote" />
+										<h:outputText style="margin-right:20px;" value="#{post.voteAsString}"
+											id="vote" />
 
-									<p:commandButton id="downvoteButton" update="upvoteButton vote downvoteButton" value="Không thích"
-										action="#{postView.downvotePost(post)}" style="#{postView.downvoteButtonStyle}"/>
-								</div>
-
+										<p:commandButton rendered="#{!postView.isPostDownvoted(post)}"
+											id="downvoteButton" update="voteSection" value="Không thích"
+											action="#{postView.downvotePost(post)}" style="margin-right:20px;" />
+										<p:commandButton rendered="#{postView.isPostDownvoted(post)}"
+											id="coloredDownvoteButton" update="voteSection" value="Không thích"
+											action="#{postView.downvotePost(post)}"
+											style="margin-right:20px; background-color: rgb(113, 147, 255);" />
+									</div>
+								 
 							</p:outputPanel>
 
 

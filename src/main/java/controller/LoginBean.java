@@ -23,6 +23,7 @@ public class LoginBean implements Serializable {
 	private String password;
 	private String msg;
 	private String username;
+	private Integer id;
 
 	private boolean isLoginInfoIncorrect = false;
 
@@ -74,7 +75,8 @@ public class LoginBean implements Serializable {
 			isLoginInfoIncorrect = false;
 			HttpSession session = SessionUtils.getSession();
 			session.setAttribute("username", username);
-			session.setAttribute("userid", userEntity.getId());
+			id = userEntity.getId();
+			session.setAttribute("userid", id);
 			try {
 				FacesContext.getCurrentInstance().getExternalContext().redirect("MainPage.xhtml");
 			} catch (IOException e) {
@@ -91,6 +93,7 @@ public class LoginBean implements Serializable {
 	public void logout() {
 		username = "";
 		password = "";
+		id = 0;
 		HttpSession session = SessionUtils.getSession();
 		session.invalidate();
 		System.out.println(SessionUtils.getUserId());
@@ -103,11 +106,11 @@ public class LoginBean implements Serializable {
 
 	public void showInfo() {
 		try {
-			FacesContext.getCurrentInstance().getExternalContext().redirect("MainPage.xhtml");
+			FacesContext.getCurrentInstance().getExternalContext().redirect("userDetailController?userID=" + id);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}	
+	}
 
 	public boolean isUserLoggedOut() {
 		if (username.equals("") || password.equals(""))
