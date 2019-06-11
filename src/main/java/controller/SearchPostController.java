@@ -24,16 +24,24 @@ import services.PostService;
 import services.UserService;
 import ultilities.SessionUtils;
 
-@WebServlet("/searchUserController")
-public class SearchUserController extends HttpServlet {
+@WebServlet("/searchPostController")
+public class SearchPostController extends HttpServlet {
 
+	@EJB
+	PostService postService;
+	
 	@EJB
 	UserService userService;
 	
+	@EJB
+	PostImageService postImageService;
+	
+	private static final String IMAGE_DIRECTORY = "/statics/images/";
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
 
-		RequestDispatcher dispatcher = req.getRequestDispatcher("searchUser.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("searchPost.jsp");
 		dispatcher.forward(req, response);
 	}
 
@@ -44,10 +52,25 @@ public class SearchUserController extends HttpServlet {
 		String searchType = req.getParameter("searchtype");
 
 		if (keyword == null || searchType == null) {
-			List<UserEntity> listUserEntity = userService.findAll();
-
-			req.setAttribute("listUserEntity", listUserEntity);
-			RequestDispatcher dispatcher = req.getRequestDispatcher("searchUser.jsp");
+			List<PostEntity> listPostEntity = postService.findAll();
+	
+			
+			List<String> imagePaths = new LinkedList<>();
+			
+			if (listPostEntity != null && !listPostEntity.isEmpty()) {
+				for (PostEntity post : listPostEntity) {
+					PostImageEntity image = postImageService.findById(Integer.valueOf(post.getImageEntity().getId()));
+					if (image != null) {
+						String url = req.getContextPath() + IMAGE_DIRECTORY + image.getName();
+						imagePaths.add(url);
+					}
+				}
+			}
+			
+			
+			req.setAttribute("imagePaths", imagePaths);
+			
+			RequestDispatcher dispatcher = req.getRequestDispatcher("searchPost.jsp");
 			dispatcher.forward(req, response);
 			return;
 		}
@@ -71,7 +94,26 @@ public class SearchUserController extends HttpServlet {
 			}
 			
 			if ("post".equals(searchType)) {
+				List<PostEntity> listPostEntity = postService.findList(keyword);
 				
+				List<String> imagePaths = new LinkedList<>();
+				
+				if (listPostEntity != null && !listPostEntity.isEmpty()) {
+					for (PostEntity post : listPostEntity) {
+						PostImageEntity image = postImageService.findById(Integer.valueOf(post.getImageEntity().getId()));
+						if (image != null) {
+							String url = req.getContextPath() + IMAGE_DIRECTORY + image.getName();
+							imagePaths.add(url);
+						}
+					}
+				}
+				
+				req.setAttribute("imagePaths", imagePaths);
+				
+				RequestDispatcher dispatcher = req.getRequestDispatcher("searchPost.jsp");
+				dispatcher.forward(req, response);
+				
+				return;
 			}
 		}
 

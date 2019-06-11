@@ -4,9 +4,11 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.persistence.Query;
 
 import dto.Post;
 import entities.PostEntity;
+import entities.UserEntity;
 import ultilities.GenericService;
 
 @Stateless
@@ -69,6 +71,17 @@ public class PostService extends GenericService<PostEntity, Post> {
 	public List<PostEntity> findAll() {
 		// TODO Auto-generated method stub
 		return super.findAll();
+	}
+	
+	public List<PostEntity> findList(String title) {
+		Query query = this.getEm()
+				.createQuery("SELECT e from " + PostEntity.class.getSimpleName() + " e WHERE e.title like :title",
+						PostEntity.class)
+				.setParameter("title", "%" + title + "%");
+
+		List<PostEntity> entities = query.getResultList();
+
+		return entities;
 	}
 
 }
