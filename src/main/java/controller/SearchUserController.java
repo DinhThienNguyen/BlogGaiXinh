@@ -30,6 +30,14 @@ public class SearchUserController extends HttpServlet {
 	@EJB
 	UserService userService;
 	
+	@EJB
+	PostService postService;
+	
+	@EJB
+	PostImageService postImageService;
+	
+	private static final String IMAGE_DIRECTORY = "/statics/images/";
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
 
@@ -71,7 +79,26 @@ public class SearchUserController extends HttpServlet {
 			}
 			
 			if ("post".equals(searchType)) {
+				List<PostEntity> listPostEntity = postService.findList(keyword);
 				
+				List<String> imagePaths = new LinkedList<>();
+				
+				if (listPostEntity != null && !listPostEntity.isEmpty()) {
+					for (PostEntity post : listPostEntity) {
+						PostImageEntity image = postImageService.findById(Integer.valueOf(post.getImageEntity().getId()));
+						if (image != null) {
+							String url = req.getContextPath() + IMAGE_DIRECTORY + image.getName();
+							imagePaths.add(url);
+						}
+					}
+				}
+				
+				req.setAttribute("imagePaths", imagePaths);
+				
+				RequestDispatcher dispatcher = req.getRequestDispatcher("searchPost.jsp");
+				dispatcher.forward(req, response);
+				
+				return;
 			}
 		}
 
