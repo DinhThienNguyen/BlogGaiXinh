@@ -20,23 +20,25 @@ public class UserService extends GenericService<UserEntity, User> {
 		super(UserEntity.class);
 	}
 
-//	@Override
-//	public UserEntity toEntity(User bom) {
-//		if (Objects.isNull(bom)) {
-//			return null;
-//		}
-//		return new UserEntity(bom.getId(), bom.getUsername(), bom.getPassword(), bom.getFullname(), bom.getGender(),
-//				bom.getEmail());
-//	}
-//
-//	@Override
-//	public User toBom(UserEntity entity) {
-//		if (Objects.isNull(entity)) {
-//			return null;
-//		}
-//		return new User(entity.getId(), entity.getUsername(), entity.getPassword(), entity.getFullname(),
-//				entity.getGender(), entity.getEmail());
-//	}
+	// @Override
+	// public UserEntity toEntity(User bom) {
+	// if (Objects.isNull(bom)) {
+	// return null;
+	// }
+	// return new UserEntity(bom.getId(), bom.getUsername(), bom.getPassword(),
+	// bom.getFullname(), bom.getGender(),
+	// bom.getEmail());
+	// }
+	//
+	// @Override
+	// public User toBom(UserEntity entity) {
+	// if (Objects.isNull(entity)) {
+	// return null;
+	// }
+	// return new User(entity.getId(), entity.getUsername(), entity.getPassword(),
+	// entity.getFullname(),
+	// entity.getGender(), entity.getEmail());
+	// }
 
 	@Override
 	public UserEntity findById(Integer id) {
@@ -76,5 +78,16 @@ public class UserService extends GenericService<UserEntity, User> {
 		if (entities.isEmpty())
 			return null;
 		return entities.get(0);
+	}
+
+	public List<UserEntity> findList(String username) {
+		Query query = this.getEm()
+				.createQuery("SELECT e from " + UserEntity.class.getSimpleName() + " e WHERE e.username like :username",
+						UserEntity.class)
+				.setParameter("username", "%" + username + "%");
+
+		List<UserEntity> entities = query.getResultList();
+
+		return entities;
 	}
 }
