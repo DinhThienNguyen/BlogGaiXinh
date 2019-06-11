@@ -37,8 +37,7 @@ public class UserEditController extends HttpServlet {
 		String userID = req.getParameter("userID");
 		
 		if (userIDLogin == null) {
-			RequestDispatcher dispatcher = req.getRequestDispatcher("userDetailErr.jsp");
-			dispatcher.forward(req, response);
+			response.sendRedirect("SignUp.xhtml");
 			return;
 		}
 		
@@ -84,8 +83,7 @@ public class UserEditController extends HttpServlet {
 		String userID = req.getParameter("userID");
 		
 		if (userIDLogin == null) {
-			RequestDispatcher dispatcher = req.getRequestDispatcher("userDetailErr.jsp");
-			dispatcher.forward(req, response);
+			response.sendRedirect("SignUp.xhtml");
 			return;
 		}
 		

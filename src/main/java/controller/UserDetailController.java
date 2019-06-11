@@ -45,8 +45,7 @@ public class UserDetailController extends HttpServlet {
 		Integer userIDLogin = (Integer) req.getSession().getAttribute("userid");
 
 		if (userIDLogin == null && userID == null) {
-			RequestDispatcher dispatcher = req.getRequestDispatcher("userDetailErr.jsp");
-			dispatcher.forward(req, response);
+			response.sendRedirect("SignUp.xhtml");
 			return;
 		}
 
@@ -58,8 +57,7 @@ public class UserDetailController extends HttpServlet {
 		UserEntity userEntity = userService.find(Integer.parseInt(userID));
 
 		if (userEntity == null) {
-			RequestDispatcher dispatcher = req.getRequestDispatcher("userDetailErr.jsp");
-			dispatcher.forward(req, response);
+			response.sendRedirect("SignUp.xhtml");
 			return;
 		}
 
