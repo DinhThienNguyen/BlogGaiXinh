@@ -2,7 +2,7 @@
 <!DOCTYPE html
 	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:jsf="http://xmlns.jcp.org/jsf">
 <h:head>
 	<!-- Required meta tags -->
 	<meta charset="utf-8" />
@@ -36,8 +36,7 @@
 
 	.card-header-main {
 		height: 34px;
-		background:
-			url(https://www.redditstatic.com/desktop2x/img/id-cards/home-banner@2x.png) center center/cover no-repeat rgb(0, 121, 211);
+
 		border-radius: 4px 4px 0px 0px;
 	}
 
@@ -94,6 +93,10 @@
 									<f:param name="postId" value="#{post.id}" />
 									<h:panelGrid columns="1" cellpadding="5">
 
+										<p:commandLink action="#{postView.moveToUser(post)}">
+											<h:outputText style="font-size: .8em" value="Đăng bởi #{post.userEntity.fullname}"
+												/>
+										</p:commandLink>
 										<h:outputLabel value="#{post.title}"
 											style="font-weight: bold; cursor: pointer;" />
 
@@ -108,14 +111,23 @@
 								</p:commandLink>
 
 
-								<div>
-									<p:commandButton id="upvoteButton" update="upvoteButton vote downvoteButton" value="Thích"
-										action="#{postView.upvotePost(post)}" style="#{postView.upvoteButtonStyle}"/>
-																									
+								<div jsf:id="voteSection">
+									<p:commandButton rendered="#{!postView.isPostUpvoted(post)}" id="upvoteButton"
+										update="voteSection" value="Thích" action="#{postView.upvotePost(post)}"
+										style="margin-right:20px;" />
+									<p:commandButton rendered="#{postView.isPostUpvoted(post)}" id="coloredUpvoteButton"
+										update="voteSection" value="Thích" action="#{postView.upvotePost(post)}"
+										style="margin-right:20px; background-color: rgb(255, 69, 0);" />
+
 									<h:outputText style="margin-right:20px;" value="#{post.voteAsString}" id="vote" />
 
-									<p:commandButton id="downvoteButton" update="upvoteButton vote downvoteButton" value="Không thích"
-										action="#{postView.downvotePost(post)}" style="#{postView.downvoteButtonStyle}"/>
+									<p:commandButton rendered="#{!postView.isPostDownvoted(post)}" id="downvoteButton"
+										update="voteSection" value="Không thích" action="#{postView.downvotePost(post)}"
+										style="margin-right:20px;" />
+									<p:commandButton rendered="#{postView.isPostDownvoted(post)}"
+										id="coloredDownvoteButton" update="voteSection" value="Không thích"
+										action="#{postView.downvotePost(post)}"
+										style="margin-right:20px; background-color: rgb(113, 147, 255);" />
 								</div>
 
 							</p:outputPanel>
@@ -133,13 +145,9 @@
 				<div class="card">
 					<div class="card-header card-header-main"></div>
 					<div class="card-body">
-						<p class="card-text">The best posts on BlogGaiXinh for you,
-							pulled from the most active communities on BlogGaiXinh. Check
-							here to see the most shared, upvoted, and commented content on
-							the internet.</p>
-
-						<button type="button" class="btn btn btn-info form-control btn-create-post">Create
-							post</button>
+						<p class="card-text">Chào mừng bạn đến BlogGaiXinh, nơi tận hưởng các bức ảnh tuyệt vời của các
+							cô nàng xinh đẹp! Bạn có ảnh để chia sẻ? Ấn để đăng bài ngay!</p>
+						<a href="CreatePost.xhtml" class="btn btn btn-info form-control btn-create-post">Đăng bài</a>
 					</div>
 				</div>
 

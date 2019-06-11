@@ -16,7 +16,12 @@
 <script src="resources/js/script.js"></script>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+			<a class="navbar-brand" href="MainPage.xhtml">BlogGaiXinh</a>
+			
 
+			
+		</nav>
 	<div class="container container-user">
 
 		<c:if test="${status == 'success'}">

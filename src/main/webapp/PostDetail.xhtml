@@ -59,6 +59,11 @@
 		<ui:include src="header.xhtml" />
 	</ui:insert>
 	<div class="container">
+		<h:form>
+			<p:commandLink action="#{postDetailView.moveToUser}">
+				<h:outputText style="font-size: .8em" value="Đăng bởi #{postDetailView.post.userEntity.fullname}" />
+			</p:commandLink>
+		</h:form>
 		<div>
 			<h:outputLabel styleClass="title" value="#{postDetailView.post.title}" />
 		</div>
@@ -70,10 +75,10 @@
 
 		<h:form id="form">
 			<div class="form-group">
-				<div>					
+				<div>
 					<p:commandButton update="form" value="Thích" action="#{postDetailView.upvotePost}"
 						style="#{postDetailView.upvoteButtonStyle}" />
-					<h:outputText style="margin-right:20px;" value="#{postDetailView.post.voteAsString}" id="vote" />					
+					<h:outputText style="margin-right:20px;" value="#{postDetailView.post.voteAsString}" id="vote" />
 					<p:commandButton update="form" value="Không thích" action="#{postDetailView.downvotePost}"
 						style="#{postDetailView.downvoteButtonStyle}" />
 				</div>
@@ -100,23 +105,10 @@
 							</p:outputPanel>
 							<p:outputPanel>
 								<h:panelGrid columns="1" cellpadding="1">
-
-
 									<h:outputText value="#{comment.content}" />
 								</h:panelGrid>
 							</p:outputPanel>
-							<p:outputPanel>
-								<h:panelGrid columns="1" cellpadding="1">
 
-									<p:commandLink update="upvote" action="#{postDetailView.upvotePost}">
-										<h:outputText value="#{comment.voteAsString}" id="upvote" />
-									</p:commandLink>
-									<p:commandLink update="downvote" action="#{postDetailView.downvotePost}">
-										<h:outputText value="#{comment.voteAsString}" id="downvote" />
-									</p:commandLink>
-
-								</h:panelGrid>
-							</p:outputPanel>
 
 						</h:panelGrid>
 					</p:dataViewListItem>
