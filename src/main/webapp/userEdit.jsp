@@ -28,6 +28,16 @@
 			<div id="status-update" class="alert alert-danger" style="margin-top: 30px"
 				role="alert">Không thể cập nhật.</div>
 		</c:if>
+		
+		<c:if test="${status == 'misspass'}">
+			<div id="status-update" class="alert alert-danger" style="margin-top: 30px"
+				role="alert">Mật khẩu không đúng, xin nhập lai.</div>
+		</c:if>
+		
+		<c:if test="${status == 'missre'}">
+			<div id="status-update" class="alert alert-danger" style="margin-top: 30px"
+				role="alert">Mật khẩu nhật lại không đúng.</div>
+		</c:if>
 
 		<div style="margin-top: 30px">
 			<div class="row">
@@ -139,7 +149,8 @@
 
 							</div>
 							<div class="tab-pane" id="profile-v">
-								<form class="form-horizontal">
+								<form class="form-horizontal" action="userEditPassController?userID=${userEntity.getId()}"
+									method="POST">
 									<fieldset>
 
 										<div class="form-group">
@@ -149,7 +160,7 @@
 												id="profile-image1" class="img-circle user-image-tab">
 											</label>
 											<div class="col-md-6">
-												<span class="lable-tab">mtSiniChi</span>
+												<span class="lable-tab">${userEntity.getUsername()}</span>
 
 											</div>
 										</div>
@@ -159,7 +170,7 @@
 											<label class="col-md-3 control-label" for="fullName">Mật
 												khẩu cũ</label>
 											<div class="col-md-6">
-												<input id="pass-old" name="fullName" type="text"
+												<input id="pass-old" name="pass-old" type="password"
 													placeholder="" class="form-control input-md">
 
 											</div>
@@ -170,7 +181,7 @@
 											<label class="col-md-3 control-label" for="username">Mật
 												khẩu mới</label>
 											<div class="col-md-6">
-												<input id="pass-new" name="username" type="text"
+												<input id="pass-new" name="pass-new" type="password"
 													placeholder="" class="form-control input-md">
 
 											</div>
@@ -181,7 +192,7 @@
 											<label class="col-md-3 control-label" for="email">Nhập
 												lại</label>
 											<div class="col-md-6">
-												<input id="pass-re" name="email" type="text" placeholder=""
+												<input id="pass-re" name="pass-re" type="password" placeholder=""
 													class="form-control input-md">
 
 											</div>
